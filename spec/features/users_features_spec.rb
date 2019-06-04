@@ -77,97 +77,89 @@ describe 'Feature Test: User Signout', :type => :feature do
 end
 
 describe 'Feature Test: User AI Flow', :type => :feature do
-  #
-  # before :each do
-  #   @rollercoaster = Attraction.create(
-  #     :name => "Roller Coaster",
-  #     :tickets => 5,
-  #     :nausea_rating => 2,
-  #     :happiness_rating => 4,
-  #     :min_height => 32
-  #   )
-  #   @ferriswheel = Attraction.create(
-  #     :name => "Ferris Wheel",
-  #     :tickets => 2,
-  #     :nausea_rating => 2,
-  #     :happiness_rating => 1,
-  #     :min_height => 28
-  #   )
-  #   @teacups = Attraction.create(
-  #     :name => "Teacups",
-  #     :tickets => 1,
-  #     :nausea_rating => 5,
-  #     :happiness_rating => 1,
-  #     :min_height => 28
-  #   )
-  #   visit '/users/new'
-  #   admin_signup
-  # end
 
-  it 'links to the ais that was created by the user from the users show page when user is logged in' #do
-    # expect(page).to have_content("See attractions")
-  #end
+  before :each do
+    @cortana_ai = Ai.create(
+      :name => "Cortana",
+      :description => "Is a smart AI formerly in service with the United Nations Space Command. :P ",
+      :balance => 10
+    )
+    @siri_ai = Ai.create(
+      :name => "Siri",
+      :description => "Siri is an intelligent assistant that offers a faster, easier way to get things done on your Apple devices.",
+      :balance => 10
+    )
+    @alexa_ai = Ai.create(
+      :name => "Siri",
+      :description => "Echo, better known by its wake word, 'Alexa,' can be queried about the weather, stream news and music on demand and serves as a robotic assistant that responds to voice commands to control home lighting and much more.",
+      :balance => 10
+    )
+    visit '/users/new'
+    userm_admin_signup
+  end
 
-  it 'has a link from the user show page to the ais index page' #do
-    # click_link('See attractions')
-    # expect(page).to have_content("#{@teacups.name}")
-    # expect(page).to have_content("#{@rollercoaster.name}")
-    # expect(page).to have_content("#{@ferriswheel.name}")
-  #end
+  it 'links to the ais that was created by the user from the users show page when user is logged in' do
+    expect(page).to have_content("See ais")
+  end
 
-  it 'a users can create a ai from the user show page' #do
-    # click_link('See attractions')
-    # expect(page).to have_content("New Attraction")
-  #end
+  it 'has a link from the user show page to the ais index page' do
+    click_link('See ais')
+    expect(page).to have_content("#{@cortana_ai.name}")
+    expect(page).to have_content("#{@siri_ai.name}")
+    expect(page).to have_content("#{@alexa_ai.name}")
+  end
 
-  it 'a user can create an ai' #do
-    # click_link('See attractions')
-    # click_link("New Attraction")
-    # expect(current_path).to eq('/attractions/new')
-    # fill_in("attraction[name]", :with => "Haunted Mansion")
-    # fill_in("attraction[min_height]", :with => "32")
-    # fill_in("attraction[happiness_rating]", :with => "2")
-    # fill_in("attraction[nausea_rating]", :with => "1")
-    # fill_in("attraction[tickets]", :with => "4")
-    # click_button('Create Attraction')
-    # expect(current_path).to eq("/attractions/4")
-    # expect(page).to have_content("Haunted Mansion")
-  #end
+  it 'a users can create a ai from the user show page' do
+    click_link('See ais')
+    expect(page).to have_content("Create new AI")
+  end
 
-  it "has link to ai/show from ai/index page" #do
-    # click_link('See attractions')
-    # expect(page).to have_content("Show #{@ferriswheel.name}")
-  #end
+  it 'a user can create an ai' do
+    click_link('See ais')
+    click_link("Create new AI")
+    expect(current_path).to eq('/ais/new')
+    fill_in("ai[name]", :with => "C-3PO")
+    fill_in("ai[description]", :with => "'fluent in over six million forms of communication'")
+    fill_in("ai[balance]", :with => "3")
+    click_button('Create AI')
+    expect(current_path).to eq("/ais/4")
+    expect(page).to have_content("C-3PO")
+  end
 
-  it "links to ais/show page from ais/index" #do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # expect(current_path).to eq("/attractions/1")
-  #end
+  it "has link to ai/show from ai/index page" do
+    click_link('See ais')
+    expect(page).to have_content("Show #{@alexa_ai.name}")
+  end
+
+  it "links to ais/show page from ais/index" do
+    click_link('See ais')
+    click_link("Show #{@cortana_ai.name}")
+    expect(current_path).to eq("/ais/1")
+  end
 
 
-  it "has a link (as the ai creator) to edit ai from the ais/show page"# do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # expect(page).to have_content("Edit Attraction")
-  #end
+  it "has a link (as the ai creator) to edit ai from the ais/show page" do
+    click_link('See ais')
+    click_link("Show #{@cortana_ai.name}")
+    expect(page).to have_content("Edit AI")
+  end
 
-  it "links to ai/edit page from ai/show page when logged in as the ai creator" #do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # click_link("Edit Attraction")
-    # expect(current_path).to eq("/attractions/1/edit")
-  #end
+  it "links to ai/edit page from ai/show page when logged in as the ai creator" do
+    click_link('See ais')
+    click_link("Show #{@cortana_ai.name}")
+    click_link("Edit AI")
+    expect(current_path).to eq("/ais/1/edit")
+  end
 
-  it "updates an ai when the ai creator edits it" #do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # click_link("Edit Attraction")
-    # fill_in("attraction[name]", :with => "Nitro")
-    # click_button("Update Attraction")
-    # expect(current_path).to eq("/attractions/1")
-    # expect(page).to have_content("Nitro")
-  #end
+  it "updates an ai when the ai creator edits it" do
+    click_link('See ais')
+    click_link("Show #{@cortana_ai.name}")
+    click_link("Edit AI")
+    fill_in("ai[name]", :with => "R2-D2")
+    click_button("Update AI")
+    expect(current_path).to eq("/ais/1")
+    expect(page).to have_content("R2-D2")
+  end
 
   it "has a link to an ais/:id/services/new from the ai show page" #do
 
