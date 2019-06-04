@@ -1,55 +1,49 @@
 require_relative "../rails_helper.rb"
 describe 'Feature Test: User Signup', :type => :feature do
 
-  it 'successfully signs up' #do
-    # visit '/users/new'
-    # expect(current_path).to eq('/users/new')
-    # # user_signup method is defined in login_helper.rb
-    # user_signup
-    # expect(current_path).to eq('/users/1')
-    # expect(page).to have_content("Amy Poehler")
-    # expect(page).to have_content("Mood")
-    # expect(page).to have_content("happy")
-    # expect(page).to have_content("15")
-    # expect(page).to have_content("58")
-#  end
+  it 'successfully signs up' do
+    visit '/users/new'
+    expect(current_path).to eq('/users/new')
+    # user_signup method is defined in login_helper.rb
+    user_signup
+    expect(current_path).to eq('/users/1')
+    expect(page).to have_content("Amy Poehler")
+    expect(page).to have_content(0)
+ end
 
-  it "on sign up, successfully adds a session hash" #do
-    # visit '/users/new'
-    # # user_signup method is defined in login_helper.rb
-    # user_signup
-    # expect(page.get_rack_session_key('user_id')).to_not be_nil
-#  end
+  it "on sign up, successfully adds a session hash" do
+    visit '/users/new'
+    # user_signup method is defined in login_helper.rb
+    user_signup
+    expect(page.get_rack_session_key('user_id')).to_not be_nil
+  end
 
-  it 'successfully logs in as non-admin' #do
+  it 'successfully logs in' do
 
-    # # user_login method is defined in login_helper.rb
-    # create_standard_user
-    # visit '/signin'
-    # expect(current_path).to eq('/signin')
-    # user_login
-    # expect(current_path).to eq('/users/1')
-    # expect(page).to have_content("Mindy")
-    # expect(page).to have_content("Mood")
-    # expect(page).to have_content("happy")
-    # expect(page).to have_content("10")
-    # expect(page).to have_content("50")
-  #end
+    # user_login method is defined in login_helper.rb
+    create_standard_user
+    visit '/signin'
+    expect(current_path).to eq('/signin')
+    user_login
+    expect(current_path).to eq('/users/1')
+    expect(page).to have_content("Mindy")
+    expect(page).to have_content(0)
+  end
 
-  it "on log in, successfully adds a session hash" #do
-    # create_standard_user
-    # visit '/signin'
-    # # user_login method is defined in login_helper.rb
-    # user_login
-    # expect(page.get_rack_session_key('user_id')).to_not be_nil
-  #end
+  it "on log in, successfully adds a session hash" do
+    create_standard_user
+    visit '/signin'
+    # user_login method is defined in login_helper.rb
+    user_login
+    expect(page.get_rack_session_key('user_id')).to_not be_nil
+  end
 
-  it 'prevents user from viewing user show page and redirects to home page if not logged in' #do
-    # create_standard_user
-    # visit '/users/1'
-    # expect(current_path).to eq('/')
-    # expect(page).to have_content("Sign Up")
-  #end
+  it 'prevents user from viewing user show page and redirects to home page if not logged in' do
+    create_standard_user
+    visit '/users/1'
+    expect(current_path).to eq('/')
+    expect(page).to have_content("Sign Up")
+  end
 
 
 
@@ -57,28 +51,28 @@ end
 
 describe 'Feature Test: User Signout', :type => :feature do
 
-  it 'has a link to log out from the users/show page' #do
-    # visit '/users/new'
-    # # user_signup method is defined in login_helper.rb
-    # user_signup
-    # expect(page).to have_content("Log Out")
-#  end
+  it 'has a link to log out from the users/show page' do
+    visit '/users/new'
+    # user_signup method is defined in login_helper.rb
+    user_signup
+    expect(page).to have_content("Log Out")
+  end
 
-  it 'redirects to home page after logging out'# do
-    # visit '/users/new'
-    # # user_signup method is defined in login_helper.rb
-    # user_signup
-    # click_link("Log Out")
-    # expect(current_path).to eq('/')
-#  end
+  it 'redirects to home page after logging out' do
+    visit '/users/new'
+    # user_signup method is defined in login_helper.rb
+    user_signup
+    click_link("Log Out")
+    expect(current_path).to eq('/')
+  end
 
-  it "successfully destroys session hash when 'Log Out' is clicked" #do
-    # visit '/users/new'
-    # # user_signup method is defined in login_helper.rb
-    # user_signup
-    # click_link("Log Out")
-    # expect(page.get_rack_session).to_not include("user_id")
-  #end
+  it "successfully destroys session hash when 'Log Out' is clicked" do
+    visit '/users/new'
+    # user_signup method is defined in login_helper.rb
+    user_signup
+    click_link("Log Out")
+    expect(page.get_rack_session).to_not include("user_id")
+  end
 
 end
 
@@ -123,6 +117,14 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
   it 'prevents unaorthized users from editing/deleting an ai on the ai index page' #do
     # click_link('See attractions')
     # expect(current_path).to eq('/attractions')
+    # expect(page).to have_content("edit")
+    # expect(page).to have_content("delete")
+    # expect(page).to have_content("new attraction")
+  #end
+
+  it 'allows aorthized users to edit/delete an ai on the ai index page' #do
+    # click_link('See attractions')
+    # expect(current_path).to eq('/attractions')
     # expect(page).to_not have_content("edit")
     # expect(page).to_not have_content("delete")
     # expect(page).to_not have_content("new attraction")
@@ -153,6 +155,13 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
     # click_link("Go on #{@ferriswheel.name}")
     # expect(current_path).to eq("/attractions/2")
   #end
+#
+#
+#
+#----------here--------------------
+#
+#
+#
 
   it "has a button from the ai show page to get more data" #do
     # click_link('See attractions')
@@ -187,6 +196,10 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
     # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
   #end
 
+  # 1. On transaction message select how was the experience
+  it "on transaction message select your experience" #do
+  #end
+
   # 2. decrease the ai balance
   it "clicking on 'run the service' updates the ai balance" #do
     # click_link('See attractions')
@@ -209,7 +222,7 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
 
 end
 
-describe 'Feature Test: User Flow', :type => :feature do
+describe 'Feature Test: User Flow for AI', :type => :feature do
   #
   # before :each do
   #   @rollercoaster = Attraction.create(
@@ -279,7 +292,7 @@ describe 'Feature Test: User Flow', :type => :feature do
   #end
 
 
-  it "has a link for the ai creator to edit ai from the ais/show page" #do
+  it "has a link as the ai creator to edit ai from the ais/show page" #do
     # click_link('See attractions')
     # click_link("Show #{@rollercoaster.name}")
     # expect(page).to have_content("Edit Attraction")
@@ -301,4 +314,10 @@ describe 'Feature Test: User Flow', :type => :feature do
     # expect(current_path).to eq("/attractions/1")
     # expect(page).to have_content("Nitro")
   #end
+
+
+end
+
+describe 'Feature Test: User Flow for AI Services', :type => :feature do
+
 end
