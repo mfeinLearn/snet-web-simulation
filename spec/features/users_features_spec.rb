@@ -161,15 +161,42 @@ describe 'Feature Test: User AI Flow', :type => :feature do
     expect(page).to have_content("R2-D2")
   end
 
-  it "has a link to an ais/:id/services/new from the ai show page" #do
+end
 
-  #end
+describe 'Feature Test: services', :type => :feature do
+  before :each do
+    #  Service.destroy_all
+    Ai.destroy_all
+    @ai = Ai.create!(name: "BB-8", description: "he’s aggressively cute",balance: 10 )
+    @service = @ai.services.create!(name: "ChatBot", description: "Lots of talking",price: 2 )
 
-  it "has a link to a spicific ai services from the ai show page" #do
+    visit '/users/new'
+    userm_admin_signup
+  end
 
-  #end
+  it 'links to the ais from the users show page when logged in' do
+    expect(page).to have_content("See ais")
+  end
 
+  it "links to ais/show page from ais/index" do
+    click_link('See ais')
+    click_link("Show #{@ai.name}")
+    expect(current_path).to eq("/ais/1")
+  end
 
+  it "has a link to a spicific ai services from the ai show page" do
+    click_link('See ais')
+    click_link("Show #{@ai.name}")
+    click_link("Show all services for #{@ai.name}")
+    expect(page).to have_text(@service.name)
+  end
+
+  it "has a link to an ais/:id/services/new from the ai show page" do
+    click_link('See ais')
+    click_link("Show #{@ai.name}")
+    click_link("Create new service for #{@ai.name}")
+    expect(page).to have_text("Create new AI Service for #{@ai.name}")
+  end
 
 end
 
