@@ -76,6 +76,111 @@ describe 'Feature Test: User Signout', :type => :feature do
 
 end
 
+describe 'Feature Test: User AI Flow', :type => :feature do
+  #
+  # before :each do
+  #   @rollercoaster = Attraction.create(
+  #     :name => "Roller Coaster",
+  #     :tickets => 5,
+  #     :nausea_rating => 2,
+  #     :happiness_rating => 4,
+  #     :min_height => 32
+  #   )
+  #   @ferriswheel = Attraction.create(
+  #     :name => "Ferris Wheel",
+  #     :tickets => 2,
+  #     :nausea_rating => 2,
+  #     :happiness_rating => 1,
+  #     :min_height => 28
+  #   )
+  #   @teacups = Attraction.create(
+  #     :name => "Teacups",
+  #     :tickets => 1,
+  #     :nausea_rating => 5,
+  #     :happiness_rating => 1,
+  #     :min_height => 28
+  #   )
+  #   visit '/users/new'
+  #   admin_signup
+  # end
+
+  it 'links to the ais that was created by the user from the users show page when user is logged in' #do
+    # expect(page).to have_content("See attractions")
+  #end
+
+  it 'has a link from the user show page to the ais index page' #do
+    # click_link('See attractions')
+    # expect(page).to have_content("#{@teacups.name}")
+    # expect(page).to have_content("#{@rollercoaster.name}")
+    # expect(page).to have_content("#{@ferriswheel.name}")
+  #end
+
+  it 'a users can create a ai from the user show page' #do
+    # click_link('See attractions')
+    # expect(page).to have_content("New Attraction")
+  #end
+
+  it 'a user can create an ai' #do
+    # click_link('See attractions')
+    # click_link("New Attraction")
+    # expect(current_path).to eq('/attractions/new')
+    # fill_in("attraction[name]", :with => "Haunted Mansion")
+    # fill_in("attraction[min_height]", :with => "32")
+    # fill_in("attraction[happiness_rating]", :with => "2")
+    # fill_in("attraction[nausea_rating]", :with => "1")
+    # fill_in("attraction[tickets]", :with => "4")
+    # click_button('Create Attraction')
+    # expect(current_path).to eq("/attractions/4")
+    # expect(page).to have_content("Haunted Mansion")
+  #end
+
+  it "has link to ai/show from ai/index page" #do
+    # click_link('See attractions')
+    # expect(page).to have_content("Show #{@ferriswheel.name}")
+  #end
+
+  it "links to ais/show page from ais/index" #do
+    # click_link('See attractions')
+    # click_link("Show #{@rollercoaster.name}")
+    # expect(current_path).to eq("/attractions/1")
+  #end
+
+
+  it "has a link (as the ai creator) to edit ai from the ais/show page"# do
+    # click_link('See attractions')
+    # click_link("Show #{@rollercoaster.name}")
+    # expect(page).to have_content("Edit Attraction")
+  #end
+
+  it "links to ai/edit page from ai/show page when logged in as the ai creator" #do
+    # click_link('See attractions')
+    # click_link("Show #{@rollercoaster.name}")
+    # click_link("Edit Attraction")
+    # expect(current_path).to eq("/attractions/1/edit")
+  #end
+
+  it "updates an ai when the ai creator edits it" #do
+    # click_link('See attractions')
+    # click_link("Show #{@rollercoaster.name}")
+    # click_link("Edit Attraction")
+    # fill_in("attraction[name]", :with => "Nitro")
+    # click_button("Update Attraction")
+    # expect(current_path).to eq("/attractions/1")
+    # expect(page).to have_content("Nitro")
+  #end
+
+  it "has a link to an ais/:id/services/new from the ai show page" #do
+
+  #end
+
+  it "has a link to a spicific ai services from the ai show page" #do
+
+  #end
+
+
+
+end
+
 describe 'Feature Test: User - AI calling Service', :type => :feature do
 
   # before :each do
@@ -144,11 +249,11 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
   #######
   #######
 
-  it "has links on the ais index page to the ais' show pages"# do
+  it "has links on the ais index page to the ais' show pages" #do
     # click_link('See attractions')
     # expect(page).to have_content("Go on #{@ferriswheel.name}")
     # expect(page).to have_content("Go on #{@rollercoaster.name}")
-#  end
+  #end
 
   it "links from the ais index page to the ais' show pages" #do
     # click_link('See attractions')
@@ -163,18 +268,11 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
 #
 #
 
-  it "has a button from the ai show page to get more data" #do
+  it "has a button from the user show page to get more data" #do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # expect(current_path).to eq("/attractions/2")
     # expect(page).to have_button("Go on this ride")
-  #end
-
-  it "clicking on 'data' redirects to user show page" #do
-    # click_link('See attractions')
-    # click_link("Go on #{@ferriswheel.name}")
-    # click_button("Go on this ride")
-    # expect(current_path).to eq("/users/1")
   #end
 
   it "clicking on 'data' updates the users data number" #do
@@ -183,8 +281,6 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
     # click_button("Go on this ride")
     # expect(page).to have_content("Tickets: 13")
   # end
-
-
 
 # ai calls service
   # 1. if ai balance is greater then the ai service price then
@@ -219,105 +315,5 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
 
 
 
-
-end
-
-describe 'Feature Test: User Flow for AI', :type => :feature do
-  #
-  # before :each do
-  #   @rollercoaster = Attraction.create(
-  #     :name => "Roller Coaster",
-  #     :tickets => 5,
-  #     :nausea_rating => 2,
-  #     :happiness_rating => 4,
-  #     :min_height => 32
-  #   )
-  #   @ferriswheel = Attraction.create(
-  #     :name => "Ferris Wheel",
-  #     :tickets => 2,
-  #     :nausea_rating => 2,
-  #     :happiness_rating => 1,
-  #     :min_height => 28
-  #   )
-  #   @teacups = Attraction.create(
-  #     :name => "Teacups",
-  #     :tickets => 1,
-  #     :nausea_rating => 5,
-  #     :happiness_rating => 1,
-  #     :min_height => 28
-  #   )
-  #   visit '/users/new'
-  #   admin_signup
-  # end
-
-  it 'links to the ais that was created by the user from the users show page when user is logged in' #do
-    # expect(page).to have_content("See attractions")
-  #end
-
-  it 'has a link from the user show page to the ais index page' #do
-    # click_link('See attractions')
-    # expect(page).to have_content("#{@teacups.name}")
-    # expect(page).to have_content("#{@rollercoaster.name}")
-    # expect(page).to have_content("#{@ferriswheel.name}")
-  #end
-
-  it 'a users can create a ai from the user show page' #do
-    # click_link('See attractions')
-    # expect(page).to have_content("New Attraction")
-  #end
-
-  it 'a user can create an ai'# do
-    # click_link('See attractions')
-    # click_link("New Attraction")
-    # expect(current_path).to eq('/attractions/new')
-    # fill_in("attraction[name]", :with => "Haunted Mansion")
-    # fill_in("attraction[min_height]", :with => "32")
-    # fill_in("attraction[happiness_rating]", :with => "2")
-    # fill_in("attraction[nausea_rating]", :with => "1")
-    # fill_in("attraction[tickets]", :with => "4")
-    # click_button('Create Attraction')
-    # expect(current_path).to eq("/attractions/4")
-    # expect(page).to have_content("Haunted Mansion")
-  #end
-
-  it "has link to ai/show from ai/index page"# do
-    # click_link('See attractions')
-    # expect(page).to have_content("Show #{@ferriswheel.name}")
-  #end
-
-  it "links to ais/show page from ais/index" #do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # expect(current_path).to eq("/attractions/1")
-  #end
-
-
-  it "has a link as the ai creator to edit ai from the ais/show page" #do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # expect(page).to have_content("Edit Attraction")
-  #end
-
-  it "links to ai/edit page from ai/show page when logged in as the ai creator" #do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # click_link("Edit Attraction")
-    # expect(current_path).to eq("/attractions/1/edit")
-  #end
-
-  it "updates an ai when the ai creator edits it" #do
-    # click_link('See attractions')
-    # click_link("Show #{@rollercoaster.name}")
-    # click_link("Edit Attraction")
-    # fill_in("attraction[name]", :with => "Nitro")
-    # click_button("Update Attraction")
-    # expect(current_path).to eq("/attractions/1")
-    # expect(page).to have_content("Nitro")
-  #end
-
-
-end
-
-describe 'Feature Test: User Flow for AI Services', :type => :feature do
 
 end
