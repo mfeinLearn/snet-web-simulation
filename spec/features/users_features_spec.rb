@@ -1,7 +1,7 @@
 require_relative "../rails_helper.rb"
 describe 'Feature Test: User Signup', :type => :feature do
 
-  it 'successfully signs up' do
+  it 'successfully signs up' #do
     # visit '/users/new'
     # expect(current_path).to eq('/users/new')
     # # user_signup method is defined in login_helper.rb
@@ -12,16 +12,16 @@ describe 'Feature Test: User Signup', :type => :feature do
     # expect(page).to have_content("happy")
     # expect(page).to have_content("15")
     # expect(page).to have_content("58")
-  end
+#  end
 
-  it "on sign up, successfully adds a session hash" do
+  it "on sign up, successfully adds a session hash" #do
     # visit '/users/new'
     # # user_signup method is defined in login_helper.rb
     # user_signup
     # expect(page.get_rack_session_key('user_id')).to_not be_nil
-  end
+#  end
 
-  it 'successfully logs in as non-admin' do
+  it 'successfully logs in as non-admin' #do
 
     # # user_login method is defined in login_helper.rb
     # create_standard_user
@@ -34,111 +34,55 @@ describe 'Feature Test: User Signup', :type => :feature do
     # expect(page).to have_content("happy")
     # expect(page).to have_content("10")
     # expect(page).to have_content("50")
-  end
+  #end
 
-  it "on log in, successfully adds a session hash" do
+  it "on log in, successfully adds a session hash" #do
     # create_standard_user
     # visit '/signin'
     # # user_login method is defined in login_helper.rb
     # user_login
     # expect(page.get_rack_session_key('user_id')).to_not be_nil
-  end
+  #end
 
-  it 'prevents user from viewing user show page and redirects to home page if not logged in' do
+  it 'prevents user from viewing user show page and redirects to home page if not logged in' #do
     # create_standard_user
     # visit '/users/1'
     # expect(current_path).to eq('/')
     # expect(page).to have_content("Sign Up")
-  end
+  #end
 
-  it 'successfully signs up as admin' do
-    # visit '/users/new'
-    # expect(current_path).to eq('/users/new')
-    # # admin_signup method is defined in login_helper.rb
-    # admin_signup
-    # expect(current_path).to eq('/users/1')
-    # expect(page).to have_content("Walt Disney")
-    # expect(page).to have_content("ADMIN")
-  end
 
-  it "on sign up for admin, successfully adds a session hash" do
-    # visit '/users/new'
-    # # admin_signup method is defined in login_helper.rb
-    # admin_signup
-    # expect(page.get_rack_session_key('user_id')).to_not be_nil
-  end
-
-  it 'successfully logs in as admin' do
-    # create_standard_and_admin_user
-    # visit '/signin'
-    # expect(current_path).to eq('/signin')
-    # # admin_login method is defined in login_helper.rb
-    # admin_login
-    # expect(current_path).to eq('/users/2')
-    # expect(page).to have_content("Walt Disney")
-    # expect(page).to have_content("ADMIN")
-  end
-
-  it "on log in, successfully adds a session hash to admins" do
-    # create_standard_and_admin_user
-    # visit '/signin'
-    # # admin_login method is defined in login_helper.rb
-    # admin_login
-    # expect(page.get_rack_session_key('user_id')).to_not be_nil
-  end
 
 end
 
 describe 'Feature Test: User Signout', :type => :feature do
 
-  it 'has a link to log out from the users/show page' do
+  it 'has a link to log out from the users/show page' #do
     # visit '/users/new'
     # # user_signup method is defined in login_helper.rb
     # user_signup
     # expect(page).to have_content("Log Out")
-  end
+#  end
 
-  it 'redirects to home page after logging out' do
+  it 'redirects to home page after logging out'# do
     # visit '/users/new'
     # # user_signup method is defined in login_helper.rb
     # user_signup
     # click_link("Log Out")
     # expect(current_path).to eq('/')
-  end
+#  end
 
-  it "successfully destroys session hash when 'Log Out' is clicked" do
+  it "successfully destroys session hash when 'Log Out' is clicked" #do
     # visit '/users/new'
     # # user_signup method is defined in login_helper.rb
     # user_signup
     # click_link("Log Out")
     # expect(page.get_rack_session).to_not include("user_id")
-  end
+  #end
 
-  it 'has a link to log out from the users/show page when user is an admin' do
-    # visit '/users/new'
-    # # admin_signup method is defined in login_helper.rb
-    # admin_signup
-    # expect(page).to have_content("Log Out")
-  end
-
-  it 'redirects to home page after admin logs out when user is an admin' do
-    # visit '/users/new'
-    # # admin_signup method is defined in login_helper.rb
-    # admin_signup
-    # click_link("Log Out")
-    # expect(current_path).to eq('/')
-  end
-
-  it "successfully destroys session hash when 'Log Out' is clicked as admin" do
-    # visit '/users/new'
-    # # admin_signup method is defined in login_helper.rb
-    # admin_signup
-    # click_link("Log Out")
-    # expect(page.get_rack_session).to_not include("user_id")
-  end
 end
 
-describe 'Feature Test: Data', :type => :feature do
+describe 'Feature Test: User - AI calling Service', :type => :feature do
 
   # before :each do
   #   @rollercoaster = Attraction.create(
@@ -171,18 +115,18 @@ describe 'Feature Test: Data', :type => :feature do
     # click_link('See attractions')
   #end
 
-  it 'links from the user show page to the ai index page' do
+  it 'links from the user show page to the ai index page' #do
     # click_link('See attractions')
     # expect(current_path).to eq('/attractions')
-  end
+  #end
 
-  it 'prevents unaorthized users from editing/deleting an ai on the ai index page' do
+  it 'prevents unaorthized users from editing/deleting an ai on the ai index page' #do
     # click_link('See attractions')
     # expect(current_path).to eq('/attractions')
     # expect(page).to_not have_content("edit")
     # expect(page).to_not have_content("delete")
     # expect(page).to_not have_content("new attraction")
-  end
+  #end
 #######
 #######
 ####### comeback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -198,95 +142,71 @@ describe 'Feature Test: Data', :type => :feature do
   #######
   #######
 
-  it "has links on the ais index page to the ais' show pages" do
+  it "has links on the ais index page to the ais' show pages"# do
     # click_link('See attractions')
     # expect(page).to have_content("Go on #{@ferriswheel.name}")
     # expect(page).to have_content("Go on #{@rollercoaster.name}")
-  end
+#  end
 
-  it "links from the ais index page to the ais' show pages" do
+  it "links from the ais index page to the ais' show pages" #do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # expect(current_path).to eq("/attractions/2")
-  end
+  #end
 
-  # it 'prevents users from editing/deleting a ride on the show page' do
-  #   # click_link('See attractions')
-  #   # click_link("Go on #{@ferriswheel.name}")
-  #   # expect(page).to_not have_content("edit")
-  #   # expect(page).to_not have_content("delete")
-  # end
-
-  it "has a button from the ai show page to get more data" do
+  it "has a button from the ai show page to get more data" #do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # expect(current_path).to eq("/attractions/2")
     # expect(page).to have_button("Go on this ride")
-  end
+  #end
 
-  it "clicking on 'data' redirects to user show page" do
+  it "clicking on 'data' redirects to user show page" #do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # click_button("Go on this ride")
     # expect(current_path).to eq("/users/1")
-  end
+  #end
 
-  it "clicking on 'data' updates the users data number" do
+  it "clicking on 'data' updates the users data number" #do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # click_button("Go on this ride")
     # expect(page).to have_content("Tickets: 13")
-  end
+  # end
 
 
 
-
-
-
-  it "clicking on 'data' updates the users mood" do
-    # click_link('See attractions')
-    # click_link("Go on #{@teacups.name}")
-    # click_button("Go on this ride")
-    # expect(page).to have_content("sad")
-  end
-
-  it "when the user is tall enough and has enough tickets, clicking on 'Go on ride' displays a thank you message" do
+# ai calls service
+  # 1. if ai balance is greater then the ai service price then
+  # say 'run the service'
+  it "when the ai balance is greater then the ai service price, clicking on 'run the service' displays a transaction (confirmation) message" #do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # click_button("Go on this ride")
     # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
-  end
+  #end
 
-  it "when the user is too short, clicking on 'Go on ride' displays a sorry message" do
-    # @user = User.find_by(:name => "Amy Poehler")
-    # @user.update(:height => 10)
+  # 2. decrease the ai balance
+  it "clicking on 'run the service' updates the ai balance" #do
     # click_link('See attractions')
     # click_link("Go on #{@teacups.name}")
     # click_button("Go on this ride")
-    # expect(page).to have_content("You are not tall enough to ride the #{@teacups.name}")
-    # expect(page).to have_content("happy")
-  end
+    # expect(page).to have_content("sad")
+  #end
 
-  it "when the user doesn't have enough tickets, clicking on 'Go on ride' displays a sorry message" do
-    # @user = User.find_by(:name => "Amy Poehler")
-    # @user.update(:tickets => 1)
+  # 3. if ai balance is less then the ai service price then
+  # say 'sorry you can not call this service'
+  it "when the ai balance is less then the ai service price, clicking on 'run the service' displays this sorry message 'sorry you can not call this service' " #do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # click_button("Go on this ride")
-    # expect(page).to have_content("You do not have enough tickets to ride the #{@ferriswheel.name}")
-    # expect(page).to have_content("Tickets: 1")
-  end
+    # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
+  #end
 
-  it "when the user is too short and doesn't have enough tickets, clicking on 'Go on ride' displays a detailed sorry message" do
-    # @user = User.find_by(:name => "Amy Poehler")
-    # @user.update(:tickets => 1, :height => 30)
-    # click_link('See attractions')
-    # click_link("Go on #{@rollercoaster.name}")
-    # click_button("Go on this ride")
-    # expect(page).to have_content("You are not tall enough to ride the #{@rollercoaster.name}")
-    # expect(page).to have_content("You do not have enough tickets to ride the #{@rollercoaster.name}")
-    # expect(page).to have_content("Tickets: 1")
-  end
+
+
+
 end
 
 describe 'Feature Test: User Flow', :type => :feature do
