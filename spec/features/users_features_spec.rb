@@ -202,104 +202,82 @@ end
 
 describe 'Feature Test: User - AI calling Service', :type => :feature do
 
-  # before :each do
-  #   @rollercoaster = Attraction.create(
-  #     :name => "Roller Coaster",
-  #     :tickets => 5,
-  #     :nausea_rating => 2,
-  #     :happiness_rating => 4,
-  #     :min_height => 32
-  #   )
-  #   @ferriswheel = Attraction.create(
-  #     :name => "Ferris Wheel",
-  #     :tickets => 2,
-  #     :nausea_rating => 2,
-  #     :happiness_rating => 1,
-  #     :min_height => 28
-  #   )
-  #   @teacups = Attraction.create(
-  #     :name => "Teacups",
-  #     :tickets => 1,
-  #     :nausea_rating => 5,
-  #     :happiness_rating => 1,
-  #     :min_height => 28
-  #   )
-  #   visit '/users/new'
-  #   user_signup
+  before :each do
+    @cortana_ai = Ai.create(
+      :name => "Cortana",
+      :description => "Is a smart AI formerly in service with the United Nations Space Command. :P ",
+      :balance => 10
+    )
+    @siri_ai = Ai.create(
+      :name => "Siri",
+      :description => "Siri is an intelligent assistant that offers a faster, easier way to get things done on your Apple devices.",
+      :balance => 10
+    )
+    @alexa_ai = Ai.create(
+      :name => "Siri",
+      :description => "Echo, better known by its wake word, 'Alexa,' can be queried about the weather, stream news and music on demand and serves as a robotic assistant that responds to voice commands to control home lighting and much more.",
+      :balance => 10
+    )
+    visit '/users/new'
+    userm_admin_signup
+  end
+
+  it 'has a link from the user show page to the ai index page' do
+    expect(page).to have_content("See ais")
+    click_link('See ais')
+    expect(page).to have_content("#{@cortana_ai.name}")
+    expect(page).to have_content("#{@siri_ai.name}")
+    expect(page).to have_content("#{@alexa_ai.name}")
+  end
+
+  it 'links from the user show page to the ai index page' do
+    click_link('See ais')
+    expect(current_path).to eq('/ais')
+  end
+
+  it 'prevents unauthorized users from editing/deleting an ai on the ai index page'# do
+  #   click_link('See ais')
+  #   expect(page).to_not have_content("edit")
+  #   expect(page).to_not have_content("delete")
+  #   expect(page).to_not have_content("Create new AI")
   # end
 
-  it 'has a link from the user show page to the ai index page' #do
-    # expect(page).to have_content("See attractions")
-    # click_link('See attractions')
-  #end
+  it 'allows authorized users to edit/delete an ai on the ai index page' do
+    click_link('See ais')
+    expect(current_path).to eq('/ais')
+    expect(page).to have_content("edit")
+    expect(page).to have_content("delete")
+    expect(page).to have_content("Create new AI")
+  end
 
-  it 'links from the user show page to the ai index page' #do
-    # click_link('See attractions')
-    # expect(current_path).to eq('/attractions')
-  #end
 
-  it 'prevents unaorthized users from editing/deleting an ai on the ai index page' #do
-    # click_link('See attractions')
-    # expect(current_path).to eq('/attractions')
-    # expect(page).to have_content("edit")
-    # expect(page).to have_content("delete")
-    # expect(page).to have_content("new attraction")
-  #end
+  it "has links on the ais index page to the ais' show pages" do
+    click_link('See ais')
+    expect(page).to have_content("Go on #{@cortana_ai.name}")
+    expect(page).to have_content("Go on #{@siri_ai.name}")
+  end
 
-  it 'allows aorthized users to edit/delete an ai on the ai index page' #do
-    # click_link('See attractions')
-    # expect(current_path).to eq('/attractions')
-    # expect(page).to_not have_content("edit")
-    # expect(page).to_not have_content("delete")
-    # expect(page).to_not have_content("new attraction")
-  #end
-#######
-#######
-####### comeback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#######
-#######
-#  it 'has titles of the rides on the ais index page' do
-    # click_link('See attractions')
-    # expect(page).to have_content("#{@ferriswheel.name}")
-    # expect(page).to have_content("#{@rollercoaster.name}")
-#  end
-  #######
-  #######!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  #######
-  #######
+  it "links from the ais index page to the ais show pages" do
+    click_link('See ais')
+    click_link("Go on #{@siri_ai.name}")
+    expect(current_path).to eq("/ais/2")
+  end
 
-  it "has links on the ais index page to the ais' show pages" #do
-    # click_link('See attractions')
-    # expect(page).to have_content("Go on #{@ferriswheel.name}")
-    # expect(page).to have_content("Go on #{@rollercoaster.name}")
-  #end
+  it "has a button from the user show page to get more data" do
+    #click_link('See ais')
+    #click_link("Go on #{@ferriswheel.name}")
+  #  expect(current_path).to eq("/attractions/2")
+    expect(page).to have_button("data")
+  end
 
-  it "links from the ais index page to the ais' show pages" #do
-    # click_link('See attractions')
-    # click_link("Go on #{@ferriswheel.name}")
-    # expect(current_path).to eq("/attractions/2")
-  #end
-#
-#
-#
-#----------here--------------------
-#
-#
-#
-
-  it "has a button from the user show page to get more data" #do
-    # click_link('See attractions')
-    # click_link("Go on #{@ferriswheel.name}")
-    # expect(current_path).to eq("/attractions/2")
-    # expect(page).to have_button("Go on this ride")
-  #end
-
-  it "clicking on 'data' updates the users data number" #do
+  it "clicking on 'data' updates the users data number" do
     # click_link('See attractions')
     # click_link("Go on #{@ferriswheel.name}")
     # click_button("Go on this ride")
     # expect(page).to have_content("Tickets: 13")
-  # end
+    click_button("data")
+    expect(page).to have_content("Data: 1")
+   end
 
 # ai calls service
   # 1. if ai balance is greater then the ai service price then
