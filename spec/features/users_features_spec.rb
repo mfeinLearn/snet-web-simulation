@@ -4,8 +4,9 @@ describe 'Feature Test: User Signup', :type => :feature do
   it 'successfully signs up' do
     visit '/users/new'
     expect(current_path).to eq('/users/new')
-    # user_signup method is defined in login_helper.rb
-    user_signup
+    fill_in("user[name]", :with => "Amy Poehler")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
     expect(current_path).to eq('/users/1')
     expect(page).to have_content("Amy Poehler")
     expect(page).to have_content(0)
@@ -223,9 +224,6 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
       :description => "An AI service that does something cool! :P",
       :price => 3
     )
-- name:string
-- description:string
-- price:integer
     visit '/users/new'
     userm_admin_signup
   end
@@ -280,36 +278,37 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
     expect(page).to have_content("Data: 1")
    end
 
-# ai calls service
-  # 1. if ai balance is greater then the ai service price then
-  # say 'run the service'
-  it "when the ai balance is greater then the ai service price, clicking on 'data' on the user show page displays a transaction (confirmation) message" #do
-      click_link('See ais')
-      click_link("Go on #{@siri_ai.name}")
-    # click_button("Go on this ride")
-    # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
-  #end
-
-  # 1. On transaction message select how was the experience
-  it "on transaction message select your experience" #do
-  #end
-
-  # 2. decrease the ai balance
-  it "clicking on 'run the service' updates the ai balance" #do
-    # click_link('See attractions')
-    # click_link("Go on #{@teacups.name}")
-    # click_button("Go on this ride")
-    # expect(page).to have_content("sad")
-  #end
-
-  # 3. if ai balance is less then the ai service price then
-  # say 'sorry you can not call this service'
-  it "when the ai balance is less then the ai service price, clicking on 'run the service' displays this sorry message 'sorry you can not call this service' " #do
-    # click_link('See attractions')
-    # click_link("Go on #{@ferriswheel.name}")
-    # click_button("Go on this ride")
-    # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
-  #end
+# # ai calls service
+#   # 1. if ai balance is greater then the ai service price then
+#   # say 'run the service'
+#   it "when the ai balance is greater then the ai service price, clicking on 'data' on the user show page displays a transaction (confirmation) message" do
+#   #### come back to this
+#       click_link('See ais')
+#       click_link("Go on #{@siri_ai.name}")
+#     # click_button("Go on this ride")
+#     # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
+#   end
+#
+#   # 1. On transaction message select how was the experience
+#   it "on transaction message select your experience" #do
+#   #end
+#
+#   # 2. decrease the ai balance
+#   it "clicking on 'run the service' updates the ai balance" #do
+#     # click_link('See attractions')
+#     # click_link("Go on #{@teacups.name}")
+#     # click_button("Go on this ride")
+#     # expect(page).to have_content("sad")
+#   #end
+#
+#   # 3. if ai balance is less then the ai service price then
+#   # say 'sorry you can not call this service'
+#   it "when the ai balance is less then the ai service price, clicking on 'run the service' displays this sorry message 'sorry you can not call this service' " #do
+#     # click_link('See attractions')
+#     # click_link("Go on #{@ferriswheel.name}")
+#     # click_button("Go on this ride")
+#     # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
+#   #end
 
 
 

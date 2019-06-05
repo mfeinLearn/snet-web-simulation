@@ -10,9 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_193928) do
+ActiveRecord::Schema.define(version: 2019_06_05_125723) do
+
+  create_table "ais", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.string "description"
+    t.integer "balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.boolean "status"
+    t.integer "service_id"
+    t.integer "ai_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "password_digest"
+    t.integer "data", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
