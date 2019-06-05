@@ -218,6 +218,14 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
       :description => "Echo, better known by its wake word, 'Alexa,' can be queried about the weather, stream news and music on demand and serves as a robotic assistant that responds to voice commands to control home lighting and much more.",
       :balance => 10
     )
+    @ai_service_01 = Service.create(
+      :name => "AI Service 1",
+      :description => "An AI service that does something cool! :P",
+      :price => 3
+    )
+- name:string
+- description:string
+- price:integer
     visit '/users/new'
     userm_admin_signup
   end
@@ -264,27 +272,20 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
   end
 
   it "has a button from the user show page to get more data" do
-    #click_link('See ais')
-    #click_link("Go on #{@ferriswheel.name}")
-  #  expect(current_path).to eq("/attractions/2")
-    expect(page).to have_button("data")
+    expect(page).to have_content("data")
   end
 
   it "clicking on 'data' updates the users data number" do
-    # click_link('See attractions')
-    # click_link("Go on #{@ferriswheel.name}")
-    # click_button("Go on this ride")
-    # expect(page).to have_content("Tickets: 13")
-    click_button("data")
+    click_link("data")
     expect(page).to have_content("Data: 1")
    end
 
 # ai calls service
   # 1. if ai balance is greater then the ai service price then
   # say 'run the service'
-  it "when the ai balance is greater then the ai service price, clicking on 'run the service' displays a transaction (confirmation) message" #do
-    # click_link('See attractions')
-    # click_link("Go on #{@ferriswheel.name}")
+  it "when the ai balance is greater then the ai service price, clicking on 'data' on the user show page displays a transaction (confirmation) message" #do
+      click_link('See ais')
+      click_link("Go on #{@siri_ai.name}")
     # click_button("Go on this ride")
     # expect(page).to have_content("Thanks for riding the #{@ferriswheel.name}!")
   #end
