@@ -1,7 +1,17 @@
 class AisController < ApplicationController
 
+def index
+  @ais = Ai.all
+end
+
+
+def show
+  @ai = Ai.find(params[:id])
+  @services = @ai.services
+end
+
 def new
-#  byebug
+  #  byebug
   @ai = Ai.new
 end
 
@@ -21,16 +31,19 @@ def index
   @ais = Ai.all
 end
 
-def show
-  set_ai
-end
 
 def edit
-  set_ai
+  @ai = Ai.find_by(id: params[:id])
+  if !@ai
+    redirect_to ais_path
+  end
 end
 
 def update
-  set_ai
+  @ai = Ai.find_by(id: params[:id])
+  if !@ai
+    redirect_to ais_path
+  end
   if @ai.update(ai_params)
     redirect_to ai_path(@ai)
   else
@@ -39,19 +52,22 @@ def update
 end
 
 def destroy
-  set_ai
+  @ai = Ai.find_by(id: params[:id])
+  if !@ai
+    redirect_to ais_path
+  end
   @ai.destroy
   redirect_to ais_path
 end
 
 private
 
-def set_ai
-  @ai = Ai.find_by(id: params[:id])
-  if !@ai
-    redirect_to ais_path
-  end
-end
+# def set_ai
+#   @ai = Ai.find_by(id: params[:id])
+#   if !@ai
+#     redirect_to ais_path
+#   end
+# end
 
 def ai_params
   params.require(:ai).permit(:name,:user_id, :description, :balance )
