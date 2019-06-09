@@ -1,3 +1,6 @@
+<% if @ai.user_id == current_user.id %>
+<%= link_to "Edit AI", edit_ai_path(@ai) %>
+<% end %>
 <h1>One Ai</h1>
 
 Name: <%= @ai.name %>

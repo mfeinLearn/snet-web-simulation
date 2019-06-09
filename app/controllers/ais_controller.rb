@@ -8,6 +8,8 @@ end
 def create
   @ai = Ai.create(ai_params)
   @user = User.find(current_user.id)
+  #byebug
+  @ai.user_id = @user.id
   if @ai.save
     redirect_to ai_path(@ai)
   else

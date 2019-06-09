@@ -1,5 +1,5 @@
 require_relative "../rails_helper.rb"
-describe 'Feature Test: User Signup', :type => :feature do
+describe 'Feature Test: User Signup - ', :type => :feature do
 
   it 'successfully signs up' do
     visit '/users/new'
@@ -62,7 +62,7 @@ describe 'Feature Test: User Signup', :type => :feature do
 
 end
 
-describe 'Feature Test: User Signout', :type => :feature do
+describe 'Feature Test: User Signout - ', :type => :feature do
 
   it 'has a link to log out from the users/show page' do
     visit '/users/new'
@@ -93,7 +93,7 @@ describe 'Feature Test: User Signout', :type => :feature do
 
 end
 
-describe 'Feature Test: User AI Flow', :type => :feature do
+describe 'Feature Test: User AI Flow - ', :type => :feature do
 
   before :each do
     @mindy = User.create(
@@ -194,11 +194,15 @@ describe 'Feature Test: User AI Flow', :type => :feature do
 
 end
 
-describe 'Feature Test: services', :type => :feature do
+describe 'Feature Test: services - ', :type => :feature do
   before :each do
     #  Service.destroy_all
+    @mindy = User.create(
+      name: "Mindy",
+      password: "password"
+      )
     Ai.destroy_all
-    @ai = Ai.create!(name: "BB-8", description: "he’s aggressively cute",balance: 10 )
+    @ai = Ai.create!(name: "BB-8", description: "he’s aggressively cute",balance: 10 , user_id: 1)
     @service = @ai.services.create!(name: "ChatBot", description: "Lots of talking",price: 2 )
 
     visit '/users/new'
@@ -233,7 +237,7 @@ describe 'Feature Test: services', :type => :feature do
 
 end
 
-describe 'Feature Test: User - AI calling Service', :type => :feature do
+describe 'Feature Test: User - AI calling Service - ', :type => :feature do
 
   before :each do
     @cortana_ai = Ai.create(
