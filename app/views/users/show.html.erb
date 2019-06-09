@@ -1,5 +1,5 @@
 <%= link_to "Log Out", logout_path, method: :delete %>
-<%= link_to "Create new AI", new_ai_path%>
+<%= link_to "Create new AI", new_ai_path(@user)%>
 
 <h1>Hi, <%= @user.name %> 👋 Welcome!</h1>
 <p>Data: <%= @user.data %></p>

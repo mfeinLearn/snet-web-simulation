@@ -100,6 +100,10 @@ describe 'Feature Test: User AI Flow', :type => :feature do
       name: "Mindy",
       password: "password"
       )
+    @mindy = User.create(
+      name: "Bob",
+      password: "password"
+      )
     @cortana_ai = Ai.create(
       :name => "Cortana",
       :description => "Is a smart AI formerly in service with the United Nations Space Command. :P ",
@@ -110,13 +114,13 @@ describe 'Feature Test: User AI Flow', :type => :feature do
       :name => "Siri",
       :description => "Siri is an intelligent assistant that offers a faster, easier way to get things done on your Apple devices.",
       :balance => 10,
-      :user_id => 1
+      :user_id => 2
     )
     @alexa_ai = Ai.create(
       :name => "Siri",
       :description => "Echo, better known by its wake word, 'Alexa,' can be queried about the weather, stream news and music on demand and serves as a robotic assistant that responds to voice commands to control home lighting and much more.",
       :balance => 10,
-      :user_id => 1
+      :user_id => 2
     )
     visit '/users/new'
     fill_in("user[name]", :with => "Walt Disney")
@@ -125,10 +129,8 @@ describe 'Feature Test: User AI Flow', :type => :feature do
   end
 
   it 'list of links of the users ais (that was created by the user) on the users show page when user is logged in' do
-
-    expect(page).to have_content("#{@cortana_ai.name}")
-    expect(page).to have_content("#{@siri_ai.name}")
-    expect(page).to have_content("#{@alexa_ai.name}")
+  #  expect(page).to eq('/user/1')
+    expect(page).to have_content(@cortana_ai.name)
   end
 
   it 'has a link from the user show page to the ais index page' do

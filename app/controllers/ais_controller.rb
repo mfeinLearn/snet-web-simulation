@@ -6,7 +6,7 @@ def new
 end
 
 def create
-  @ai = Ai.new(ai_params)
+  @ai = Ai.create(ai_params)
   @user = User.find(current_user.id)
   if @ai.save
     redirect_to ai_path(@ai)
@@ -53,6 +53,7 @@ end
 
 def ai_params
   params.require(:ai).permit(:name,:user_id, :description, :balance )
+
 end
 
 end
