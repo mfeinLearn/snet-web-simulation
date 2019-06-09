@@ -1,0 +1,21 @@
+<%= link_to "Log Out", logout_path, method: :delete %>
+<%= link_to "Create new AI", new_ai_path%>
+
+<h1>Hi, <%= @user.name %> 👋 Welcome!</h1>
+<p>Data: <%= @user.data %></p>
+
+
+<p>See All AIs: <%= link_to "See ais", ais_path %>
+
+<h3>Increase your data:</h3>
+<p>drive car: <%= link_to "add data", user_path(@user) %>
+<p>use phone: <%= link_to "add data", user_path(@user) %>
+<p>go to google: <%= link_to "add data", user_path(@user) %>
+<p>go to facebook: <%= link_to "add data", user_path(@user) %>
+
+  <p>My AI:</p>
+  <% @user.ais.each do |ai| %>
+  <p>Name: <%=link_to ai.name, ai_path(ai) %></p>
+  <p>Description: <%= ai.description %></p>
+  <p>Balance: <%= ai.balance %></p>
+  <% end %>

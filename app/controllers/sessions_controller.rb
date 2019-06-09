@@ -15,6 +15,9 @@ class SessionsController < ApplicationController
     end
   end
 
+  def home
+  end
+
   def destroy
     #binding.pry
     session.delete :user_id

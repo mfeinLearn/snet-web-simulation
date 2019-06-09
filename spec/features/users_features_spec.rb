@@ -9,38 +9,50 @@ describe 'Feature Test: User Signup', :type => :feature do
     click_button('Create User')
     expect(current_path).to eq('/users/1')
     expect(page).to have_content("Amy Poehler")
-    expect(page).to have_content(0)
+    # expect(page).to have_content(0)
  end
 
   it "on sign up, successfully adds a session hash" do
     visit '/users/new'
-    # user_signup method is defined in login_helper.rb
-    user_signup
+    fill_in("user[name]", :with => "Amy Poehler")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
     expect(page.get_rack_session_key('user_id')).to_not be_nil
   end
 
   it 'successfully logs in' do
 
-    # user_login method is defined in login_helper.rb
-    create_standard_user
+    @mindy = User.create(
+      name: "Mindy",
+      password: "password"
+      )
     visit '/signin'
     expect(current_path).to eq('/signin')
-    user_login
+    select 'Mindy',from:'user_name'
+    fill_in("user[password]", :with => "password")
+    click_button('Sign In')
     expect(current_path).to eq('/users/1')
     expect(page).to have_content("Mindy")
-    expect(page).to have_content(0)
+
   end
 
   it "on log in, successfully adds a session hash" do
-    create_standard_user
+    @mindy = User.create(
+      name: "Mindy",
+      password: "password"
+      )
     visit '/signin'
-    # user_login method is defined in login_helper.rb
-    user_login
+    select 'Mindy',from:'user_name'
+    fill_in("user[password]", :with => "password")
+    click_button('Sign In')
     expect(page.get_rack_session_key('user_id')).to_not be_nil
   end
 
   it 'prevents user from viewing user show page and redirects to home page if not logged in' do
-    create_standard_user
+    @mindy = User.create(
+      name: "Mindy",
+      password: "password"
+      )
     visit '/users/1'
     expect(current_path).to eq('/')
     expect(page).to have_content("Sign Up")
@@ -54,23 +66,27 @@ describe 'Feature Test: User Signout', :type => :feature do
 
   it 'has a link to log out from the users/show page' do
     visit '/users/new'
-    # user_signup method is defined in login_helper.rb
-    user_signup
+    fill_in("user[name]", :with => "Amy Poehler")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
     expect(page).to have_content("Log Out")
   end
 
   it 'redirects to home page after logging out' do
     visit '/users/new'
-    # user_signup method is defined in login_helper.rb
-    user_signup
+    fill_in("user[name]", :with => "Amy Poehler")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
     click_link("Log Out")
     expect(current_path).to eq('/')
   end
 
   it "successfully destroys session hash when 'Log Out' is clicked" do
     visit '/users/new'
-    # user_signup method is defined in login_helper.rb
-    user_signup
+
+    fill_in("user[name]", :with => "Amy Poehler")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
     click_link("Log Out")
     expect(page.get_rack_session).to_not include("user_id")
   end
@@ -80,27 +96,39 @@ end
 describe 'Feature Test: User AI Flow', :type => :feature do
 
   before :each do
+    @mindy = User.create(
+      name: "Mindy",
+      password: "password"
+      )
     @cortana_ai = Ai.create(
       :name => "Cortana",
       :description => "Is a smart AI formerly in service with the United Nations Space Command. :P ",
-      :balance => 10
+      :balance => 10,
+      :user_id => 1
     )
     @siri_ai = Ai.create(
       :name => "Siri",
       :description => "Siri is an intelligent assistant that offers a faster, easier way to get things done on your Apple devices.",
-      :balance => 10
+      :balance => 10,
+      :user_id => 1
     )
     @alexa_ai = Ai.create(
       :name => "Siri",
       :description => "Echo, better known by its wake word, 'Alexa,' can be queried about the weather, stream news and music on demand and serves as a robotic assistant that responds to voice commands to control home lighting and much more.",
-      :balance => 10
+      :balance => 10,
+      :user_id => 1
     )
     visit '/users/new'
-    userm_admin_signup
+    fill_in("user[name]", :with => "Walt Disney")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
   end
 
-  it 'links to the ais that was created by the user from the users show page when user is logged in' do
-    expect(page).to have_content("See ais")
+  it 'list of links of the users ais (that was created by the user) on the users show page when user is logged in' do
+
+    expect(page).to have_content("#{@cortana_ai.name}")
+    expect(page).to have_content("#{@siri_ai.name}")
+    expect(page).to have_content("#{@alexa_ai.name}")
   end
 
   it 'has a link from the user show page to the ais index page' do
@@ -172,7 +200,9 @@ describe 'Feature Test: services', :type => :feature do
     @service = @ai.services.create!(name: "ChatBot", description: "Lots of talking",price: 2 )
 
     visit '/users/new'
-    userm_admin_signup
+    fill_in("user[name]", :with => "Walt Disney")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
   end
 
   it 'links to the ais from the users show page when logged in' do
@@ -225,7 +255,9 @@ describe 'Feature Test: User - AI calling Service', :type => :feature do
       :price => 3
     )
     visit '/users/new'
-    userm_admin_signup
+    fill_in("user[name]", :with => "Walt Disney")
+    fill_in("user[password]", :with => "password")
+    click_button('Create User')
   end
 
   it 'has a link from the user show page to the ai index page' do
