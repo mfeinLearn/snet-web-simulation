@@ -1,10 +1,42 @@
 class ServicesController < ApplicationController
+
+  def new
+    @ai = Ai.find_by_id(params[:ai_id])
+    # check if its nested & it's a proper id
+    if params[:ai_id] && ai = Ai.find_by_id(params[:ai_id])
+    # nested route
+      @service = ai.services.build
+    else
+      #unnested
+      @service = Service.new
+    end
+  end
+# user -< ai -< transaction >- service
+  def create
+    @service = Service.new(service_params)
+    @ai = Ai.find_by(id: params[:ai_id])
+    #byebug
+    #@transaction = @service.transactions.build - wrong
+    @transaction = @service.transactions.build(ai_id: params[:ai_id])
+    @transaction.save
+    if @service.save
+      redirect_to transaction_path(@transaction)
+
+      #redirect_to  ai_service_path(@ai, @service)
+    else
+      render :new
+    end
+  end
+
+
   def index
     #binding.pry
     if params[:ai_id]
       @ai = Ai.find_by(id: params[:ai_id])
+      #@ai = Ai.find_by(id: 12)
       if @ai
         #binding.pry
+        #byebug
         @services = @ai.services
       else
         redirect_to ais_path, alert:"AI not found"
@@ -26,19 +58,6 @@ class ServicesController < ApplicationController
     end
   end
 
-  def new
-    @service = Service.new
-  end
-
-  def create
-    @service = Service.new(service_params)
-
-    if @service.save
-      redirect_to @service
-    else
-      render :new
-    end
-  end
 
   def edit
     @service = Service.find(params[:id])
@@ -63,9 +82,10 @@ class ServicesController < ApplicationController
     redirect_to services_path
   end
 
+  private
 
   def service_params
-    params.require(:service).permit(:name, :description ,:price)
+    params.require(:service).permit(:name, :description ,:price, :ai_id)
   end
 
 end
