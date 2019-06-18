@@ -8,7 +8,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     #login the user
-    if @user.save
+    if @user.save # if the user does not save it will automatically
+      # add the method @user.errors - it will add all of the error messages
+      # in there(errors)| @user.errors - now it will have information about
+      # the user
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
