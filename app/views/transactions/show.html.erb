@@ -1,0 +1,10 @@
+<h1>Transaction Status</h1>
+
+
+<p><%= @transaction.ai.user.name %>  how was your experience?</p>
+You currently have:
+<% if @transaction.status == nil %>
+  <%= "No status" %>
+<% else %>
+  <%= "something" %>
+<% end %>
