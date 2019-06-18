@@ -1,5 +1,11 @@
 class AisController < ApplicationController
 
+def new
+  #  byebug
+  @ai = Ai.new
+end
+
+
 def index
   @ais = Ai.all
 end
@@ -10,10 +16,6 @@ def show
   @services = @ai.services
 end
 
-def new
-  #  byebug
-  @ai = Ai.new
-end
 
 def create
   @ai = Ai.create(ai_params)
