@@ -13,7 +13,7 @@
 <p>go to google: <%= link_to "add data", user_path(@user) %>
 <p>go to facebook: <%= link_to "add data", user_path(@user) %>
 
-  <p>My AI:</p>
+  <h3>My AI:</h3>
   <% @user.ais.each do |ai| %>
   <p>Name: <%=link_to ai.name, ai_path(ai) %></p>
   <p>Description: <%= ai.description %></p>
