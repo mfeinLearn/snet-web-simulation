@@ -10,8 +10,9 @@ delete '/logout' => 'sessions#destroy'
 resources :users
 resources :ais#, only:[:new ,:create, :show, :index, :update, :edit]
 resources :services
-# resources :ais, only: [:show] do
-#   resources :services, only: [:index, :show, :new]
-# end
+resources :transactions
+resources :ais, only: [:show] do
+  resources :services, only: [:index, :show, :new, :create]
+end
 
 end
