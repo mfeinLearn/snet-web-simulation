@@ -1,1 +1,8 @@
-CYBERPUNK 2077!!!! :)
+<h1>All Services</h1>
+
+<% @services.each do |service| %>
+<p>Name:  <%= link_to service.name %> (price: <%= service.price %>)</br>
+
+Description: <%= service.description %></p> <br>
+<% end %>
+<br>
