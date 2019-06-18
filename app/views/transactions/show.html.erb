@@ -1,10 +1,17 @@
 <h1>Transaction Status</h1>
 
 
-<p><%= @transaction.ai.user.name %>  how was your experience?</p>
-You currently have:
-<% if @transaction.status == nil %>
-  <%= "No status" %>
-<% else %>
-  <%= "something" %>
+<p>Hi, <%= @transaction.ai.user.name %>!</p>
+
+<%# if @transaction.status == nil %>
+  <%#= "No status" %>
+<%# else %>
+<p> Is the transaction done? <%#= @transaction.done_transaction %></p>
+<%# end %>
+<p> What was your rating for the service?</p>
+
+<%= form_for(:transaction, :url => new_transaction_path, :method => :post) do |f| %>
+<%#= form_for @transaction do |f| %>
+<%= f.label "Status" %> <br />
+<%= f.check_box :status %> <br />
 <% end %>

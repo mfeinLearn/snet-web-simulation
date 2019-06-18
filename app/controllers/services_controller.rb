@@ -21,8 +21,6 @@ class ServicesController < ApplicationController
     @transaction.save
     if @service.save
       redirect_to transaction_path(@transaction)
-
-      #redirect_to  ai_service_path(@ai, @service)
     else
       render :new
     end
