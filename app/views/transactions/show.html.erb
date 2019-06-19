@@ -1,7 +1,7 @@
 <h1>Transaction Status</h1>
 
 
-<p>Hi, <%= @transaction.ai.user.name %>!</p>
+<p>Hi, <%= current_user.name %>!</p>
 
 <%# if @transaction.status == nil %>
   <%#= "No status" %>
@@ -10,8 +10,9 @@
 <%# end %>
 <p> What was your rating for the service?</p>
 
-<%= form_for(:transaction, :url => new_transaction_path, :method => :post) do |f| %>
-<%#= form_for @transaction do |f| %>
+<%#= form_for(:transaction, :url => transactions_path, :method => :post) do |f| %>
+<%= form_for @transaction do |f| %>
 <%= f.label "Status" %> <br />
 <%= f.check_box :status %> <br />
+<%= f.submit %>
 <% end %>
