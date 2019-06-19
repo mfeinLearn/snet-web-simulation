@@ -30,7 +30,7 @@ def create
 end
 
 def index
-  @ais = Ai.all
+  @ais = Ai.all.order_by_ais
 end
 
 
