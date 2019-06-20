@@ -31,7 +31,7 @@ class User < ApplicationRecord
   # end
 
   def self.create_by_github_omniauth(auth)
-    self.find_or_create_by(username: auth[:info][:email]) do |u|
+    self.find_or_create_by(name: auth[:info][:email]) do |u|
       # SecureRandom.hex - creates a random password for you
       u.password = SecureRandom.hex
     end
