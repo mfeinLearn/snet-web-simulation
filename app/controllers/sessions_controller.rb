@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     #byebug
     if params[:provider] == 'github'
         @user = User.create_by_github_omniauth(auth)
+        # raise @user.inspect
         session[:user_id] = @user.id
         redirect_to user_path(@user)
     else
