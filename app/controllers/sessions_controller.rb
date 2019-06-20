@@ -6,15 +6,22 @@ class SessionsController < ApplicationController
 
   def create
     #byebug
-    @user = User.find_by(name: params[:user][:name])
-    #raise @user.inspect
-
-    if @user && @user.authenticate(params[:user][:password])
-    session[:user_id] = @user.id
-      redirect_to user_path(@user)
+    if params[:provider] == 'github'
+        @user = User.create_by_github_omniauth(auth)
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
     else
-      flash[:error] = "Sorry, your username or password was incorrect"
-      redirect_to '/login'
+
+      @user = User.find_by(name: params[:user][:name])
+      #raise @user.inspect
+      # regular login
+      if @user && @user.authenticate(params[:user][:password])
+      session[:user_id] = @user.id
+        redirect_to user_path(@user)
+      else
+        flash[:error] = "Sorry, your username or password was incorrect"
+        redirect_to '/login'
+      end
     end
   end
 
@@ -22,9 +29,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-#byebug
     #session.delete :user_id
     session.clear
     redirect_to root_path
+  end
+
+
+  private
+
+  def auth
+    request.env['omniauth.auth']
   end
 end

@@ -8,6 +8,8 @@ post '/signup' => 'users#create'
 get '/login' => 'sessions#new'
 post '/login' => 'sessions#create'
 delete '/logout' => 'sessions#destroy'
+
+get '/auth/:provider/callback' => 'sessions#create'
 resources :users
 resources :ais#, only:[:new ,:create, :show, :index, :update, :edit]
 resources :services

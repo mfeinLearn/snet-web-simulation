@@ -28,6 +28,15 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# omniauth gems
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+# this allows you to use the dot emv file and have access to it in your app
+# dot env file is where we store all of our secret information and not push it up to
+# github
+gem 'dotenv-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
