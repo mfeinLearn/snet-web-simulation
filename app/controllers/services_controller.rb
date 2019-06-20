@@ -18,9 +18,9 @@ class ServicesController < ApplicationController
     @ai = Ai.find_by(id: params[:ai_id])
     #byebug
     #@transaction = @service.transactions.build - wrong
-    @transaction = @service.transactions.build(ai_id: params[:ai_id])
-    @transaction.save
     if @service.save
+      @transaction = @service.transactions.build(ai_id: params[:ai_id])
+      @transaction.save
       redirect_to transaction_path(@transaction)
     else
       render :new

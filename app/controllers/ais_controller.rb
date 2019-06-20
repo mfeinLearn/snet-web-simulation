@@ -5,9 +5,8 @@ def new
   @ai = Ai.new
 end
 
-
 def index
-  @ais = Ai.all
+  @ais = Ai.all.order_by_ais
 end
 
 
@@ -19,7 +18,7 @@ end
 
 def create
   @ai = Ai.create(ai_params)
-  @user = User.find(current_user.id)
+  @user = current_user
   #byebug
   @ai.user_id = @user.id
   if @ai.save
@@ -27,10 +26,6 @@ def create
   else
     render :new
   end
-end
-
-def index
-  @ais = Ai.all.order_by_ais
 end
 
 
