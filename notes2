@@ -9,3 +9,11 @@ created_at: "2019-06-18 01:08:21",
 updated_at: "2019-06-18 01:08:21">
 
 user -< ai -< transaction >- service
+--------
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  # provider :github, ENV["GITHUB_CLIENT_ID"],ENV["GITHUB_CLIENT_SECRET"],
+  provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"],ENV["GOOGLE_CLIENT_SECRET"], skip_jwt: true
+end
+
+---------

@@ -40,5 +40,6 @@ class SessionsController < ApplicationController
 
   def auth
     request.env['omniauth.auth']
+    #byebug
   end
 end

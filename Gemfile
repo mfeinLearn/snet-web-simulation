@@ -36,7 +36,7 @@ gem 'omniauth-google-oauth2'
 # dot env file is where we store all of our secret information and not push it up to
 # github
 gem 'dotenv-rails'
-
+gem 'rails-erd', group: :development
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

@@ -14,7 +14,9 @@ class ServicesController < ApplicationController
 # user -< ai -< transaction >- service
   def create
     #byebug
-    @service = Service.new(service_params)
+  #  @service = Service.new(service_params)#find_or_create_by
+    @service = Service.find_or_create_by(service_params)#find_or_create_by
+    #byebug
     @ai = Ai.find_by(id: params[:ai_id])
     #byebug
     #@transaction = @service.transactions.build - wrong
