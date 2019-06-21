@@ -1,8 +1,20 @@
 class AisController < ApplicationController
 
 def new
-  #  byebug
   @ai = Ai.new
+end
+
+def create
+  byebug
+  @ai = Ai.create(ai_params)
+  @user = current_user
+  #byebug
+  @ai.user_id = @user.id
+  if @ai.save
+    redirect_to ai_path(@ai)
+  else
+    render :new
+  end
 end
 
 def index
@@ -13,19 +25,6 @@ end
 def show
   @ai = Ai.find(params[:id])
   @services = @ai.services
-end
-
-
-def create
-  @ai = Ai.create(ai_params)
-  @user = current_user
-  #byebug
-  @ai.user_id = @user.id
-  if @ai.save
-    redirect_to ai_path(@ai)
-  else
-    render :new
-  end
 end
 
 

@@ -13,7 +13,7 @@ class ServicesController < ApplicationController
   end
 # user -< ai -< transaction >- service
   def create
-    #byebug
+     byebug
   #  @service = Service.new(service_params)#find_or_create_by
     @service = Service.find_or_create_by(service_params)#find_or_create_by
     #byebug

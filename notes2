@@ -17,3 +17,47 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 
 ---------
+2.3.3 :020 > ai1
+ => #<Ai id: 7, name: "ai1", user_id: 1, description: "ai d", balance: 2, created_at: "2019
+-06-21 11:39:45", updated_at: "2019-06-21 11:39:45">
+2.3.3 :022 > ai1.services
+ => #<ActiveRecord::Associations::CollectionProxy []>
+2.3.3 :023 > ai1.services.build(:name => "ai service 1", :description => "desc for ai service 1", :price => 1)
+ => #<Service id: nil, name: "ai service 1", description: "desc for ai service 1", price: 1, created_at: nil, updated
+_at: nil>
+2.3.3 :024 > ai1.services.build(:name => "ai service 2", :description => "desc for ai service 2", :price => 2)
+ => #<Service id: nil, name: "ai service 2", description: "desc for ai service 2", price: 2, created_at: nil, updated
+_at: nil>
+2.3.3 :025 > ai1.services
+ => #<ActiveRecord::Associations::CollectionProxy [#<Service id: nil, name: "ai service 1", description: "desc for ai
+ service 1", price: 1, created_at: nil, updated_at: nil>, #<Service id: nil, name: "ai service 2", description: "desc
+ for ai service 2", price: 2, created_at: nil, updated_at: nil>]>
+----
+new_ai = Ai.new
+
+new_ai.services_attributes={"0"=>{:name => "s1", :description => "des2", :price => 2},"1"=>{:name => "s1", :description => "des2", :price => 1}}
+
+new_ai.save
+
+
+-----
+
+
+new_person.addresses_attributes=
+{
+"0"=>
+  {"street_address_1"=>"33 West 26",
+  "street_address_2"=>"Floor 2",
+  "city"=>"NYC",
+  "state"=>"NY",
+  "zipcode"=>"10004",
+  "address_type"=>"work1"},
+  "1"=>{"street_address_1"=>"11 Broadway",
+  "street_address_2"=>"Suite 260",
+  "city"=>"NYC",
+  "state"=>"NY", 
+  "zipcode"=>"10004",
+  "address_type"=>"work2"
+    }
+  } => {
+    "0"=>{"street_address_1"=>"33 West 26", "street_address_2"=>"Floor 2", "city"=>"NYC", "state"=>"NY", "zipcode"=>"10004", "address_type"=>"work1"}, "1"=>{"street_address_1"=>"11 Broadway", "street_address_2"=>"Suite 260", "city"=>"NYC", "state"=>"NY", "zipcode"=>"10004", "address_type"=>"work2"}}

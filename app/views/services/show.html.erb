@@ -1,6 +1,6 @@
 PRICE: $ <%= @service.price %> </p>
 
-count: <p><%= @service.ais.count %></p>
+Service AIs Count: <p><%= @service.ais.count %></p>
 
 <% @service.ais.each do |ai| %>
 <p><%= link_to ai.name, ai_path(ai)  %></p>
