@@ -12,5 +12,18 @@
 <%= f.label :balance %>
 <%= f.number_field :balance, min:0 %>
 
+<%= f.fields_for :services do |serv| %>
+
+  Service: <%= serv.label :name %>
+  <%= serv.text_field :name %><br>
+
+  <%= serv.label :description %>
+  <%= serv.text_field :description %><br>
+
+  <%= serv.label :price %>
+  <%= serv.number_field :price %><br>
+<% end %>
+
+
 <%= f.submit %>
 <% end %>

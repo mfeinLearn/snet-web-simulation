@@ -2,10 +2,11 @@ class AisController < ApplicationController
 
 def new
   @ai = Ai.new
+  @ai.services.build
 end
 
 def create
-  byebug
+  #byebug
   @ai = Ai.create(ai_params)
   @user = current_user
   #byebug
@@ -66,7 +67,8 @@ private
 # end
 
 def ai_params
-  params.require(:ai).permit(:name,:user_id, :description, :balance )
+  params.require(:ai).permit(:name,:user_id, :description, :balance,
+    services_attributes: [:name, :description, :price])
 
 end
 
