@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <%= link_to 'Log Out', logout_path, method: :delete %>
+      <%= link_to 'All AIs', ais_path %>
+      <%= link_to 'New AI', new_ai_path %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

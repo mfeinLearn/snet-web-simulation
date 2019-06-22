@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     #byebug
     if params[:provider] == 'github'
         @user = User.create_by_github_omniauth(auth)
-        # raise @user.inspect
+        #byebug
         session[:user_id] = @user.id
         redirect_to user_path(@user)
     else
@@ -30,8 +30,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    #session.delete :user_id
-    session.clear
+    session.delete :user_id
+    #session.clear
     redirect_to root_path
   end
 
@@ -40,6 +40,7 @@ class SessionsController < ApplicationController
 
   def auth
     request.env['omniauth.auth']
+    #request.env['omniauth.auth'][:extra][:raw_info][:id]
     #byebug
   end
 end
