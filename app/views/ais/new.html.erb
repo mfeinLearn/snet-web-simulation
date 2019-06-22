@@ -12,18 +12,25 @@
 <%= f.label :balance %>
 <%= f.number_field :balance, min:0 %>
 
-<%= f.fields_for :services do |serv| %>
+<p> Select a Service that already exists: </p>
+<div>
+  <%#= f.collection_select :service_id, Service.all, :id, :name, include_blank: 'Select One'%>
+</div>
 
-  Service: <%= serv.label :name %>
-  <%= serv.text_field :name %><br>
+<p> Or create a new Service: </p>
+  <div>
+    <%= f.fields_for :services do |serv| %>
 
-  <%= serv.label :description %>
-  <%= serv.text_field :description %><br>
+      <%= serv.label :name %>
+      <%= serv.text_field :name %><br>
 
-  <%= serv.label :price %>
-  <%= serv.number_field :price %><br>
-<% end %>
+      <%= serv.label :description %>
+      <%= serv.text_field :description %><br>
 
-
+      <%= serv.label :price %>
+      <%= serv.number_field :price %><br>
+    <% end %>
+  </div>
+  <br>
 <%= f.submit %>
 <% end %>
