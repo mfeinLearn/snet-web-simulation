@@ -2,6 +2,7 @@ class ServicesController < ApplicationController
 
   def new
     @ai = Ai.find_by_id(params[:ai_id])
+    #raise @ai.inspect
     # check if its nested & it's a proper id
     if params[:ai_id] && ai = Ai.find_by_id(params[:ai_id])
     # nested route
@@ -21,10 +22,11 @@ class ServicesController < ApplicationController
     #byebug
     #@transaction = @service.transactions.build - wrong
     if @service.save
-      @transaction = @service.transactions.build(ai_id: params[:ai_id])
+      #@transaction = @service.transactions.build(ai_id: params[:ai_id])
+      @transaction = Transaction.new
       #byebug
-      @transaction.save
-      redirect_to transaction_path(@transaction)
+      #@transaction.save
+      render "transactions/new"
     else
       render :new
     end
