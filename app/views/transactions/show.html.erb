@@ -1,18 +1,16 @@
 <h1>Transaction Status</h1>
 
 
-<p>Hi, <%= current_user.name %>!</p>
+<p>Hi, <%= current_user.name %>!!!!!</p>
 
-<%# if @transaction.status == nil %>
-  <%#= "No status" %>
-<%# else %>
-<p> Is the transaction done? <%#= @transaction.done_transaction %></p>
-<%# end %>
-<p> What was your rating for the service?</p>
-
-<%#= form_for(:transaction, :url => transactions_path, :method => :post) do |f| %>
-<%= form_for @transaction do |f| %>
-<%= f.label "Status" %> <br />
-<%= f.check_box :status %> <br />
-<%= f.submit %>
+<% if @transaction.status==true %>
+<h4> This transaction is completed! Thank you! I hope you enjoyed your AI!</h4>
 <% end %>
+<p>-----------------------------------------------------------------------</p>
+<b>This is the Ai that you choose:</b>
+<p>Ai: <%= @transaction.ai.name %></p>
+<b>This is the service that you choose:</b>
+<p>Name: <%= @transaction.service.name %></p>
+<p>Description: <%= @transaction.service.description %></p>
+<p>Price: <%= @transaction.service.price %></p>
+<p>----------------------------------------------------------------------</p>
