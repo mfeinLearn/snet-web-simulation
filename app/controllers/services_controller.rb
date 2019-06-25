@@ -22,6 +22,7 @@ class ServicesController < ApplicationController
     #@transaction = @service.transactions.build - wrong
     if @service.save
       @transaction = @service.transactions.build(ai_id: params[:ai_id])
+      #byebug
       @transaction.save
       redirect_to transaction_path(@transaction)
     else
