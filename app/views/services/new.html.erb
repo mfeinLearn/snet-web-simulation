@@ -1,8 +1,8 @@
 <h1>Create a Service </h1>
 
-<%= form_for [@ai ,@service] do |f| %>
+<%= form_for [@service] do |f| %>
 
-<%= f.hidden_field :ai %>
+<%#= f.hidden_field :ai %>
 <div>
 <%= f.label :name %>
 <%= f.text_field :name %>
