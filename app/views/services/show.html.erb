@@ -7,7 +7,7 @@ Service AIs Count: <p><%= @service.ais.count %></p>
 <p><%= ai.description  %></p>
 <p><%= ai.balance  %></p>
 <% end %>
-
+<p> you just used this service. This is the total amout of data you have left: <%=@service.use%></p> <br>
 <br>
 <%= @service.name %> is a service that does the folloing job: <br/> <%= @service.description %>.
 <br/><br/>
