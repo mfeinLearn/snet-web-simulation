@@ -12,14 +12,17 @@
 <%= f.label :balance %>
 <%= f.number_field :balance, min:0 %>
 
-<p> Select a Service that already exists: </p>
+<%= f.fields_for :transactions do |trans| %>
+
+
+<p> Select a Transaction that already exists: </p>
 <div>
-  <%#= f.collection_select :service_id, Service.all, :id, :name, include_blank: 'Select One'%>
+  <%= trans.collection_select :service_id, Service.all, :id, :name, include_blank: 'Select One'%>
 </div>
 
 <p> Or create a new Service: </p>
   <div>
-    <%= f.fields_for :services do |serv| %>
+    <%= trans.fields_for :service do |serv| %>
 
       <%= serv.label :name %>
       <%= serv.text_field :name %><br>
@@ -32,5 +35,6 @@
     <% end %>
   </div>
   <br>
+  <% end %>
 <%= f.submit %>
 <% end %>
