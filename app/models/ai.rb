@@ -5,7 +5,8 @@ has_many :services, through: :transactions
 
 validates :name, :description, presence: true
 
-accepts_nested_attributes_for :services
+accepts_nested_attributes_for :transactions
+
 
   scope :order_by_ais, -> {order(balance: :desc)}
 
