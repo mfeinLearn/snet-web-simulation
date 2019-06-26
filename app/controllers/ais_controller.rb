@@ -2,7 +2,9 @@ class AisController < ApplicationController
 
 def new
   @ai = Ai.new
-  @ai.services.build
+  @transaction = @ai.transactions.build
+  @transaction.build_service
+
 end
 
 def create
@@ -68,7 +70,11 @@ private
 
 def ai_params
   params.require(:ai).permit(:name,:user_id, :description, :balance,
-    services_attributes: [:name, :description, :price])
+    transactions_attributes:
+    [:service_id,
+      service_attributes:
+      [:name, :description, :price]
+      ])
 
 end
 
