@@ -6,6 +6,8 @@ has_many :users, through: :ais
  validates :name, presence: true
  validates :description, presence: true
  validates :price, presence: true
+order(balance: :desc)
+scope :order_by_price, -> {order(price: :asc)}
 
 def use
   if self.users[0].data - self.price < self.users[0].data

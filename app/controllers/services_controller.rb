@@ -46,7 +46,7 @@ class ServicesController < ApplicationController
         redirect_to ais_path, alert:"AI not found"
       end
     else
-      @services = Service.all
+      @services = Service.all.order_by_price
     end
   end
 
