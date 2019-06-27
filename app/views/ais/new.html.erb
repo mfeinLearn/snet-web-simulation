@@ -15,7 +15,7 @@
 <%= f.fields_for :transactions do |trans| %>
 
 
-<p> Select a Transaction that already exists: </p>
+<p> Select a Service that already exists: </p>
 <div>
   <%= trans.collection_select :service_id, Service.all, :id, :name, include_blank: 'Select One'%>
 </div>
