@@ -14,19 +14,10 @@ class ServicesController < ApplicationController
   end
 # user -< ai -< transaction >- service
   def create
-     #byebug
-  #  @service = Service.new(service_params)#find_or_create_by
     @service = Service.find_or_create_by(service_params)#find_or_create_by
-    #byebug
     @ai = Ai.find_by(id: params[:ai_id])
-    #byebug
-    #@transaction = @service.transactions.build - wrong
     if @service.save
-      #@transaction = @service.transactions.build(ai_id: params[:ai_id])
-      @transaction = Transaction.new
-      #byebug
-      #@transaction.save
-      render "transactions/new"
+      redirect_to service_path(@service)
     else
       render :new
     end
