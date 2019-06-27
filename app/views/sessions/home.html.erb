@@ -3,9 +3,10 @@
 <%= link_to "Sign Up", signup_path %>
 OR
 <%= link_to "Log In", login_path %>
-OR
+
 <% if session[:user_id] %>
-  <%= "You are already signed in" %>
+<%= already_signed_in %>
 <% else %>
+OR
   <%= link_to "Sign in with Github", "/auth/github" %>
 <% end %>
