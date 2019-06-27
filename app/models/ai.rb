@@ -3,7 +3,7 @@ belongs_to :user
 has_many :transactions
 has_many :services, through: :transactions
 
-validates :name, :description, presence: true
+validates :name, :description,:balance, presence: true
 
 accepts_nested_attributes_for :transactions
 
