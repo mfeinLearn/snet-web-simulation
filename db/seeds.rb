@@ -144,7 +144,7 @@
     # Robo Jigglypuff and service 9 and 10
   Transaction.create!(
     status: true,
-    service_id: 8,
+    service_id: 9,
     ai_id: 5
   )
   Transaction.create!(
