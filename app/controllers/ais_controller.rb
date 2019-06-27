@@ -14,7 +14,8 @@ def create
   #byebug
   @ai.user_id = @user.id
   if @ai.save
-    redirect_to ai_path(@ai)
+    #redirect_to ai_path(@ai)
+    redirect_to new_transaction_path
   else
     render :new
   end
