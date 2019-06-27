@@ -1,14 +1,12 @@
 <h1><% if @ai.user_id == current_user.id %></h1>
-
-<p><%= link_to "Edit AI", edit_ai_path(@ai) %></p>
+<h3><%= current_user.name%>'s AI!</h3>
 <% end %>
-<p><%= link_to "View all ais", ais_path %></p>
-<h3> <b>Name:</b>  <%= @ai.name %></h3>
-
+<p>Name:  <%= @ai.name %></p>
 <p>description: <%= @ai.description %></p>
 <p>balance: <%= @ai.balance %></p>
 <p> <b>Total Services:</b> <%= @services.count%></p>
 
-
-
+<h1><% if @ai.user_id == current_user.id %></h1>
+<p><%= link_to "Edit AI", edit_ai_path(@ai) %></p>
+<% end %>
 <p><%= link_to "See all services from #{@ai.name}", ai_services_path(@ai) %></p>
