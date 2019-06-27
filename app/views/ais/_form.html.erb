@@ -1,0 +1,39 @@
+<%= render partial: 'layouts/errors', locals: {object: @ai} %>
+
+<%= form_for(@ai) do |f| %>
+
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<%= f.label :description %>
+<%= f.text_field :description %>
+
+<%= f.label :balance %>
+<%= f.number_field :balance, min:0 %>
+
+<%= f.fields_for :transactions do |trans| %>
+
+
+<p> Select a Service that already exists: </p>
+<div>
+  <%= trans.collection_select :service_id, Service.all, :id, :name, include_blank: 'Select One'%>
+</div>
+
+<p> Or create a new Service: </p>
+  <div>
+    <%= trans.fields_for :service do |serv| %>
+
+      <%= serv.label :name %>
+      <%= serv.text_field :name %><br>
+
+      <%= serv.label :description %>
+      <%= serv.text_field :description %><br>
+
+      <%= serv.label :price %>
+      <%= serv.number_field :price %><br>
+    <% end %>
+  </div>
+  <br>
+  <% end %>
+<%= f.submit %>
+<% end %>
