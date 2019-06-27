@@ -1,13 +1,22 @@
-PRICE: $ <%= @service.price %> </p>
+<h3>Number of AIs that used this Service: <%= @service.ais.count %></h3>
 
-Service AIs Count: <p><%= @service.ais.count %></p>
+Price: $ <%= @service.price %> </p>
+<p>Service Description:</p>
+<%= @service.name %> - <%= @service.description %>.
+<br/><br/>
 
 <% @service.ais.each do |ai| %>
-<p><%= link_to ai.name, ai_path(ai)  %></p>
-<p><%= ai.description  %></p>
-<p><%= ai.balance  %></p>
+  <% if ai.user_id == current_user.id %>
+  <p>-------------------------------------------------------------</p>
+  <p>The folloiwng are the AIs that you created for this service:</p>
+  <p>Name of Ai: <%= link_to ai.name, ai_path(ai)  %></p>
+  <p>Description of Ai: <%= ai.description  %></p>
+  <p>Balance: <%= ai.balance  %></p>
+  <p></p>
+  <b>  Thank's <%= current_user.name %> for using this service!</b>
+  <p>-------------------------------------------------------------</p>
+  <% else %>
+
+  <% end %>
 <% end %>
-<p> you just used this service. This is the total amout of data you have left: <%=@service.use%></p> <br>
 <br>
-<%= @service.name %> is a service that does the folloing job: <br/> <%= @service.description %>.
-<br/><br/>
