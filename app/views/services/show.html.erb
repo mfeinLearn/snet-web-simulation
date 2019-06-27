@@ -8,8 +8,8 @@ Price: $ <%= @service.price %> </p>
 <% @service.ais.each do |ai| %>
   <% if ai.user_id == current_user.id %>
   <p>-------------------------------------------------------------</p>
-  <p>The folloiwng are the AIs that you created for this service:</p>
-  <p>Name of Ai: <%= link_to ai.name, ai_path(ai)  %></p>
+  <%= if_current_user_has_service(ai) %>
+  <p> <%= link_to ai.name, ai_path(ai)  %></p>
   <p>Description of Ai: <%= ai.description  %></p>
   <p>Balance: <%= ai.balance  %></p>
   <p></p>
