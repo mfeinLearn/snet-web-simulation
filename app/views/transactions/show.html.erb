@@ -3,9 +3,7 @@
 
 <p>Hi, <%= current_user.name %>!!!!!</p>
 
-<% if @transaction.status==true %>
-<h4> This transaction is completed! Thank you! I hope you enjoyed your AI!</h4>
-<% end %>
+<%= transaction_completed?(@transaction) %>
 <p>-----------------------------------------------------------------------</p>
 <b>This is the Ai that you choose:</b>
 <p>Ai: <%= @transaction.ai.name %></p>
