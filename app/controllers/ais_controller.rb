@@ -5,15 +5,18 @@ def new
   @transaction = @ai.transactions.build
   @transaction.build_service
 
+#   @ai = Ai.new(user_id: @user.id)
+# @user.ais << @ai
+
 end
 
 def create
   #byebug
-  @ai = Ai.create(ai_params)
-  @user = current_user
+  # @ai = Ai.new(ai_params)
+  @ai = current_user.ais.build(ai_params)
   #byebug
-  @ai.user_id = @user.id
-  if @ai.save
+  # @ai.user_id = @user.id
+  if @ai.save!
     #redirect_to ai_path(@ai)
     redirect_to new_transaction_path
   else
@@ -22,7 +25,7 @@ def create
 end
 
 def index
-  @ais = Ai.all.order_by_ais
+  @ais = Ai.order_by_ais
 end
 
 
