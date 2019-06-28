@@ -32,6 +32,14 @@ gem 'jbuilder', '~> 2.5'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
+
+# bootstap requied gems
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'simple_form'
+gem 'popper_js'
+gem 'tether-rails'
+
 # this allows you to use the dot emv file and have access to it in your app
 # dot env file is where we store all of our secret information and not push it up to
 # github
