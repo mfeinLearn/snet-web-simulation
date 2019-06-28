@@ -28,7 +28,6 @@ class UsersController < ApplicationController
     #byebug
     if logged_in?
       @user.update(:data => @user.data + 1)
-      @user.save
     else
       redirect_to root_path
     end
