@@ -1,8 +1,6 @@
 <h1>All Services</h1>
 
-<% @services.each do |service| %>
-
-<p>Name: <%= link_to service.name, service_path(service) %> (price: <%= service.price %>)</p>
-<p>Description: <%=service.description %></p>
-
+<ul><% @services.each do |service| %>
+<li> <%= link_to service.name, service_path(service) %> (price: <%= service.price %>) - <%=service.description %></li>
 <% end %>
+</ul>
