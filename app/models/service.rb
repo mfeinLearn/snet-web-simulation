@@ -9,6 +9,9 @@ has_many :users, through: :ais
 order(balance: :desc)
 scope :order_by_price, -> {order(price: :asc)}
 
+scope :search_by_name, -> (search_name){where("name = ?", search_name)}
+
+
 def use
   if self.current_user.data - self.price < self.current_user.data
     return "please get more data!"
