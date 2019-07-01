@@ -1,0 +1,16 @@
+
+"ai"=>{"name"=>"Sunny", "description"=>"UV ray is on me",
+"balance"=>"1",
+"transactions_attributes"=>{"0"=>{
+"service_id"=>"1",
+"service_attributes"=>{"name"=>"test5", "description"=>"Test Beds for comfort", "price"=>"1"}}}},
+"commit"=>"Create Ai", "controller"=>"ais", "action"=>"create"} permitted: false>
+
+
+
+"ai"=>{"name"=>"Sunny", "description"=>"UV ray is on me",
+"balance"=>"1",
+"transactions_attributes"=>{"0"=>{
+"service_id"=>"1",
+"service_attributes"=>{"name"=>"", "description"=>"", "price"=>""}}}},
+"commit"=>"Create Ai", "controller"=>"ais", "action"=>"create"} permitted: false>
