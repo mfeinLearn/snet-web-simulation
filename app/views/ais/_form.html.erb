@@ -6,7 +6,7 @@
 <%= f.text_field :name %>
 
 <%= f.label :description %>
-<%= f.text_field :description %>
+<%= f.text_area :description %>
 
 <%= f.label :balance %>
 <%= f.number_field :balance, min:0 %>
@@ -19,6 +19,7 @@
   <%= trans.collection_select :service_id, Service.all, :id, :name, include_blank: 'Select One'%>
 </div>
 
+<% if !params[:service_id] %>
 <p> Or create a new Service: </p>
   <div>
     <%= trans.fields_for :service do |serv| %>
@@ -32,6 +33,7 @@
       <%= serv.label :price %>
       <%= serv.number_field :price %><br>
     <% end %>
+  <% end %>
   </div>
   <br>
   <% end %>
