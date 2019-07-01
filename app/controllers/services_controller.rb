@@ -1,5 +1,7 @@
 class ServicesController < ApplicationController
 
+
+# find_by_id wont error out and is just nil if it cant find it
   def new
     @ai = Ai.find_by_id(params[:ai_id])
     #raise @ai.inspect
@@ -32,7 +34,7 @@ class ServicesController < ApplicationController
       if @ai
         #binding.pry
         #byebug
-        @services = @ai.services
+        @services = @ai.services.order_by_price
       else
         redirect_to ais_path, alert:"AI not found"
       end
