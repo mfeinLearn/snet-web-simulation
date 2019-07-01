@@ -1,0 +1,17 @@
+<h1> Please Confirm your transaction!!!  </h1>
+
+<%= form_for @transaction do |f| %>
+
+<%= f.label :service_id, "Select a Service" %>
+<%= f.collection_select :service_id, Service.all, :id, :name, prompt: true %>
+<div>
+<%= f.label "Status" %>
+<%= f.check_box :status %>
+</div>
+<div>
+  <%= f.label :ai_id, "Select an Ai" %>
+  <%= f.collection_select :ai_id, Ai.all, :id, :name %>
+</div>
+ <br />
+<%= f.submit %>
+<% end %>

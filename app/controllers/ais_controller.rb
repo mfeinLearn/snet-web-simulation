@@ -21,7 +21,7 @@ def create
        @transaction = @ai.transactions.last
        @transaction.service_id = params[:ai][:transactions_attributes]["0"][:service_id]
        @transaction.save
-      redirect_to new_transaction_path
+      redirect_to edit_transaction_path(@transaction)
   else
   #byebug
   # @ai.user_id = @user.id

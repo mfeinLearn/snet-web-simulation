@@ -14,11 +14,16 @@ class TransactionsController < ApplicationController
   end
 
   def show
-    @transaction = Transaction.find_by(id: params[:id])
     #byebug
+    @transaction = Transaction.last
     #@ai = Ai.find_by(id: params[:id])
     #@service = Service.find_by(id: params[:id])
 #byebug
+  end
+
+  def edit
+    @transaction = Transaction.find_by(id: params[:id])
+
   end
 
   def update
@@ -28,9 +33,9 @@ class TransactionsController < ApplicationController
       @transaction.done_transaction
       @transaction.save
       #byebug
-      redirect_to ai_services_path(@transaction.ai)
+      redirect_to transaction_path(@transaction.ai)
     else
-      redirect_to transaction_path(@transaction)
+      redirect_to edit_transaction_path(@transaction)
     end
   end
 
