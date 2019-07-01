@@ -34,11 +34,12 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 
 # bootstap requied gems
-gem 'bootstrap'
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'popper_js'
 gem 'tether-rails'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # this allows you to use the dot emv file and have access to it in your app
 # dot env file is where we store all of our secret information and not push it up to

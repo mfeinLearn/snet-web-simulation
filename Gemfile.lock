@@ -315,7 +315,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
-  bootstrap
+  bootstrap (~> 4.3.1)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
@@ -341,6 +341,7 @@ DEPENDENCIES
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails
   sqlite3
   tether-rails
   turbolinks (~> 5)
