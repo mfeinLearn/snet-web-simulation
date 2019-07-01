@@ -21,4 +21,4 @@ Confirm:
 - [x] The application is pretty DRY
 - [x] Limited logic in controllers(scope)
 - [x] Views use helper methods if appropriate
-- [ ] Views use partials if appropriate
+- [x] Views use partials if appropriate
