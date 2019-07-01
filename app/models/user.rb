@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password # sets a validation for
+  # password is true
+  # :password, presence: true - this is already built into has_secure_password
+# the password would be hashed and salted befor it hits the database
   has_many :ais
   has_many :transactions, through: :ais
   has_many :services, through: :transactions
