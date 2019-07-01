@@ -11,30 +11,26 @@ def new
 end
 
 def create
-  #byebug
-#####---####
-  #byebug
-  # @ai = Ai.new(ai_params)
   @ai = current_user.ais.build(ai_params)
-  if params[:ai][:transactions_attributes]["0"][:service_id] != ""
-       @ai.save
-       @transaction = @ai.transactions.last
-       @transaction.service_id = params[:ai][:transactions_attributes]["0"][:service_id]
-       @transaction.save
-      redirect_to edit_transaction_path(@transaction)
-  else
-  #byebug
-  # @ai.user_id = @user.id
-    if @ai.save!
-      #redirect_to ai_path(@ai)
-      redirect_to new_transaction_path
+  if current_user.data > 220
+    if params[:ai][:transactions_attributes]["0"][:service_id] != ""
+         @ai.save
+         @transaction = @ai.transactions.last
+         @transaction.service_id = params[:ai][:transactions_attributes]["0"][:service_id]
+         @transaction.save
+        redirect_to edit_transaction_path(@transaction)
     else
-      render :new
+      if @ai.save!
+        redirect_to new_transaction_path
+      else
+        render :new
+      end
     end
+  else
+    redirect_to user_path(current_user)
   end
-
-#####---####
 end
+
 
 def index
   @ais = Ai.order_by_price
