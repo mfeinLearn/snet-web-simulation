@@ -10,15 +10,7 @@
   </head>
 
   <body>
-    <% if logged_in? %>
-      <%= link_to 'Go home',  user_path(current_user) %>
-      <%= link_to 'Log Out', logout_path, method: :delete %>
-      <%= link_to 'All AIs', ais_path %>
-      <%= link_to 'New AI', new_ai_path %>
-      <%= link_to 'All Services', services_path %>
-      <%= link_to 'New Service', new_service_path %>
-    <% end %>
-
+    <%= render 'layouts/navbar' %>
     <%= yield %>
   </body>
 </html>
