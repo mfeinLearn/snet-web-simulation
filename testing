@@ -14,3 +14,4 @@
 "service_id"=>"1",
 "service_attributes"=>{"name"=>"", "description"=>"", "price"=>""}}}},
 "commit"=>"Create Ai", "controller"=>"ais", "action"=>"create"} permitted: false>
+--------------
