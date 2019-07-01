@@ -51,20 +51,18 @@ class ServicesController < ApplicationController
         redirect_to ai_services_path(@ai), alert:"Service not found"
       end
     else
-      @service = Service.find(params[:id])
+      set_service
     end
   end
 
 
   def edit
-    @service = Service.find(params[:id])
+    set_service
   end
 
   def update
-    @service = Service.find(params[:id])
-
+    set_service
     @service.update(service_params)
-
     if @service.save
       redirect_to @service
     else
@@ -73,13 +71,20 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    @service = Service.find(params[:id])
+    set_service
     @service.destroy
     flash[:notice] = "Service deleted."
     redirect_to services_path
   end
 
   private
+
+  def set_service
+    @service = Service.find_by(id: params[:id])
+    if !@service
+      redirect_to services_path
+    end
+  end
 
   def service_params
     params.require(:service).permit(:name, :description ,:price, :ai_id)

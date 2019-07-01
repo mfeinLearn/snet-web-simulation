@@ -1,17 +1,4 @@
 class TransactionsController < ApplicationController
-  def new
-    @transaction =Transaction.new
-  end
-
-  def create
-
-    @transaction = Transaction.create(
-      service_id: params[:transaction][:service_id],
-      status: params[:transaction][:status],
-      ai_id: params[:transaction][:ai_id])
-      #raise @transaction.inspect
-    redirect_to transaction_path(@transaction)
-  end
 
   def show
     #byebug
@@ -20,6 +7,8 @@ class TransactionsController < ApplicationController
     #@service = Service.find_by(id: params[:id])
 #byebug
   end
+
+
 
   def edit
     @transaction = Transaction.find_by(id: params[:id])
@@ -38,8 +27,5 @@ class TransactionsController < ApplicationController
       redirect_to edit_transaction_path(@transaction)
     end
   end
-
-
-
 
 end

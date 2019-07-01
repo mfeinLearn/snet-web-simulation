@@ -43,23 +43,17 @@ end
 
 
 def show
-  @ai = Ai.find(params[:id])
+  set_ai
   @services = @ai.services
 end
 
 
 def edit
-  @ai = Ai.find_by(id: params[:id])
-  if !@ai
-    redirect_to ais_path
-  end
+  set_ai
 end
 
 def update
-  @ai = Ai.find_by(id: params[:id])
-  if !@ai
-    redirect_to ais_path
-  end
+  set_ai
   if @ai.update(ai_params)
     redirect_to ai_path(@ai)
   else
@@ -68,22 +62,19 @@ def update
 end
 
 def destroy
-  @ai = Ai.find_by(id: params[:id])
-  if !@ai
-    redirect_to ais_path
-  end
+  set_ai
   @ai.destroy
   redirect_to ais_path
 end
 
 private
 
-# def set_ai
-#   @ai = Ai.find_by(id: params[:id])
-#   if !@ai
-#     redirect_to ais_path
-#   end
-# end
+def set_ai
+  @ai = Ai.find_by(id: params[:id])
+  if !@ai
+    redirect_to ais_path
+  end
+end
 
 def ai_params
   params.require(:ai).permit(:name,:user_id, :description, :balance,
