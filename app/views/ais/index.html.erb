@@ -1,7 +1,6 @@
 <h1>AI index page</h1>
 
-<% @ais.each do |ai| %>
-<p><%=link_to ai.name_and_balance, ai_path(ai) %></p>
-<%= link_to 'Destroy',  ai_path(ai), data: { confirm: 'Are you sure?' }, method: :delete %> OR <%= link_to "Edit AI", edit_ai_path(ai) %> </ br>
-</ br>
-<% end %>
+<ul><% @ais.each do |ai| %>
+  <li><%=link_to ai.name_and_balance, ai_path(ai) %> - <%= link_to 'Destroy',  ai_path(ai), data: { confirm: 'Are you sure?' }, method: :delete %> OR <%= link_to "Edit AI", edit_ai_path(ai) %></li>
+  <% end %>
+</ul>
