@@ -10,7 +10,7 @@ order(balance: :desc)
 scope :order_by_price, -> {order(price: :asc)}
 
 def use
-  if self.users[0].data - self.price < self.users[0].data
+  if self.current_user.data - self.price < self.current_user.data
     return "please get more data!"
   else
     result = self.users[0].data - self.price
