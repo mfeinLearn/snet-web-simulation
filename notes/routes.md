@@ -20,6 +20,18 @@ path helpers
 and _path
 
 
+****************
+Resource routing:
+
+- Resource Routing = allows you to quickly declare all of the common routes for a given resourceful controller.
+
+- Instead of declaring separate routes for your index, show, new, edit, create, update and destroy actions, a resourceful route declares them in a single line of code.
+
+Browsers request pages from Rails by making a request for a URL using a specific HTTP method, such as GET, POST, PATCH, PUT and DELETE.
+
+Each method is a request to perform an operation on the resource. A resource route maps a number of related requests to actions in a single controller.
+****************
+
 
 root 'sessions#home'
 get '/signup' => 'users#new'
@@ -138,7 +150,11 @@ post    GET  /posts/:id(.:format)   posts#show
 
 These four columns tell us everything that we'll need in order to use the route helper methods. The breakdown is below:
 
-    Column 1 - This column gives the prefix for the route helper methods. In the current application, posts and post are the prefixes for the methods that you can use throughout your applications. The two most popular method types are _path and _url. So if we want to render a relative link path to our posts' index page, the method would be posts_path or posts_url. The difference between _path and _url is that _path gives the relative path and _url renders the full URL. If you open up the rails console in the sample app you can test these route helpers out. Run app.posts_path and see what the output is. You can also run app.posts_url and see how it prints out the full path instead of the relative path. In general, it's best to use the _path version so that nothing breaks if your server domain changes.
+    Column 1 - This column gives the prefix for the ###-route helper methods-### . In the current application, posts and post are the prefixes for the methods that you can use throughout your applications. The two most popular method types are _path and _url. So if we want to render a relative link path to our posts' index page, the method would be posts_path or posts_url.
+    > The difference between _path and _url is that
+    * _path gives the relative path and
+    * _url renders the full URL.
+    If you open up the rails console in the sample app you can test these route helpers out. Run app.posts_path and see what the output is. You can also run app.posts_url and see how it prints out the full path instead of the relative path. In general, it's best to use the _path version so that nothing breaks if your server domain changes.
 
     Column 2 - This is the HTTP verb.
 

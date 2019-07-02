@@ -1,38 +1,3 @@
-# Steps for a visit to an Ais index page:
-
-#1. request: GET /ais (http://localhost:3000/ais)  #URL request (1)
-👇                                        #is sent to router...
-#2. config/routes.rb
-#3. resources :ais                     (#helper includes abstraction of..)
-#4. get /ais => 'ais#index'               #Request matches route and
-👇                                        #is sent to the controller
-#5. app/controller/ais_controller.rb
-#6. def index
-#     @ais = Ai.all                       # The index acton is run which makes a request for all of the ai instances from the model (3)
-#   end
-👇
-#7. app/models/ai.rb
-# class Ai < ActiveRecord::Base # Gets all of the ais from the database(4)
-# end                           # and returns to controller
-👇
-#8. app/controllers/ais_controller.rb
-# def index                     # Assign all of the ais to
-# @ais = Ai.all                 # an instance variable, and
-# end                           # sends them to the view (6)...
-👇
-# index.html.erb                # View uses @ais (7)
-                                # to display a list
-                                # of all of the ais'
-                                # names and emails at
-
-                                # "http://localhost:3000/ais" (8)
-# <ul><% @ais.each do |ai| %>
-  # <li><%=link_to ai.name_and_balance, ai_path(ai) %> - <%= link_to 'Destroy',  ai_path(ai), data: { confirm: 'Are you sure?' }, method: :delete %> OR <%= link_to "Edit AI", edit_ai_path(ai) %></li>
-  # <% end %>
-# </ul>
-
-
-
 class AisController < ApplicationController
 
 def new
@@ -119,6 +84,42 @@ end
 
 end
 
+# index, show, create
+
+# Steps for a visit to an Ais index page:
+
+#1. request: GET /ais (http://localhost:3000/ais)  #URL request (1)
+👇                                        #is sent to router...
+#2. config/routes.rb
+#3. resources :ais                     (#helper includes abstraction of..)
+#4. get /ais => 'ais#index'               #Request matches route and
+👇                                        #is sent to the controller
+#5. app/controller/ais_controller.rb
+#6. def index
+#     @ais = Ai.all                       # The index acton is run which makes a request for all of the ai instances from the model (3)
+#   end
+👇
+#7. app/models/ai.rb
+# class Ai < ActiveRecord::Base # Gets all of the ais from the database(4)
+# end                           # and returns to controller
+👇
+#8. app/controllers/ais_controller.rb
+# def index                     # Assign all of the ais to
+# @ais = Ai.all                 # an instance variable, and
+# end                           # sends them to the view (6)...
+👇
+# index.html.erb                # View uses @ais (7)
+                                # to display a list
+                                # of all of the ais'
+                                # names and emails at
+
+                                # "http://localhost:3000/ais" (8)
+# <ul><% @ais.each do |ai| %>
+  # <li><%=link_to ai.name_and_balance, ai_path(ai) %> - <%= link_to 'Destroy',  ai_path(ai), data: { confirm: 'Are you sure?' }, method: :delete %> OR <%= link_to "Edit AI", edit_ai_path(ai) %></li>
+  # <% end %>
+# </ul>
+
+
 ############################################################################################
 #  Step for a visit to an individual ai’s page:
 
@@ -172,7 +173,7 @@ end
 # post /ais => 'ais#create'                           #Request matches route
 👇                                                        # in ais controller...
 # app/controllers/ais_controller.rb
-# def create                                             # The 'create' action is run, which
+# def create                                       # The 'create' action is run, which
 #   @ai = Ai.new(ai_params)                        # creates a new ai with params
 #   ...                                                  # then the new ai instance
 # end
