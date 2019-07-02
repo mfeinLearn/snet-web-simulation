@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     #login the user
+    # this is where validations happen 
     if @user.save # if the user does not save it will automatically
       # add the method @user.errors - it will add all of the error messages
       # in there(errors)| @user.errors - now it will have information about
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    #require in our object that comes in 
+    #require in our object that comes in
     # from the params and permit any other params
     # that we want
     params.require(:user).permit(:name, :password, :data)
