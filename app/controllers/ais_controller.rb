@@ -32,6 +32,7 @@ def create
 end
 
 
+
 def index
   @ais = Ai.order_by_price
   #@ais = Ai.order_by_ais
