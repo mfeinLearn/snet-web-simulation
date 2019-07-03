@@ -14,5 +14,6 @@ resources :transactions
 resources :ais, only: [:show] do
   resources :services, only: [:index, :show, :new, :create]
 end
-
+# - Resource Routing = allows you to quickly
+## declare all of the common routes for a given resourceful controller.
 end

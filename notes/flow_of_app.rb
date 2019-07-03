@@ -111,7 +111,7 @@ end
 # index.html.erb                # View uses @ais (7)
                                 # to display a list
                                 # of all of the ais'
-                                # names and emails at
+                                # names and balances at
 
                                 # "http://localhost:3000/ais" (8)
 # <ul><% @ais.each do |ai| %>
@@ -204,8 +204,8 @@ end
 # <p>
 #   <strong>Name:</strong>
 #   <%= @ai.name %>                               #View uses @ai to show
-#   ...                                             #the ai's name and age
-#   <%= @ai.age %>
+#   ...                                             #the ai's name and balance
+#   <%= @ai.balance %>
 # </p>
 # ...
 👇                                                  # http://localhost:3000/ais/:id
