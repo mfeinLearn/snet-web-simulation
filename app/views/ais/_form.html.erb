@@ -1,5 +1,7 @@
 <%= render partial: 'layouts/errors', locals: {object: @ai} %>
-
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
 <%= form_for(@ai) do |f| %>
 
 <%= f.label :name %>

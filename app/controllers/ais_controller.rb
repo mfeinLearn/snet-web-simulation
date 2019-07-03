@@ -17,20 +17,29 @@ end
 def create
   @ai = current_user.ais.build(ai_params)
   if current_user.data > 220 # check if the current user date is greater then 220
-    if params[:ai][:transactions_attributes]["0"][:service_id] != "" # if selected in the dropdown
-         @ai.save
-         @transaction = @ai.transactions.last
-         @transaction.service_id = params[:ai][:transactions_attributes]["0"][:service_id]
-         @transaction.save
-        redirect_to edit_transaction_path(@transaction)
+
+    if params[:ai][:transactions_attributes]["0"][:service_id] != "" && params[:ai][:transactions_attributes]["0"][:service_attributes][:name] != "" && params[:ai][:transactions_attributes]["0"][:service_attributes][:description] != "" && params[:ai][:transactions_attributes]["0"][:service_attributes][:price] != ""
+      flash[:notice] = "Invalid action - please only pick from the list or create a new service"
+      redirect_to new_ai_path
     else
-      # if typed in manually
-      if @ai.save!
-        redirect_to new_transaction_path
+      if params[:ai][:transactions_attributes]["0"][:service_id] != "" # if selected in the dropdown
+           @ai.save
+           @transaction = @ai.transactions.last
+           @transaction.service_id = params[:ai][:transactions_attributes]["0"][:service_id]
+           @transaction.save
+          redirect_to edit_transaction_path(@transaction)
       else
-        render :new
+        # if typed in manually
+        if @ai.save!
+          redirect_to new_transaction_path
+        else
+          render :new
+        end
       end
     end
+
+
+
   else
     redirect_to user_path(current_user)
   end
