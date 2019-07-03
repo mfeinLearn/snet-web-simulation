@@ -34,12 +34,12 @@ class ServicesController < ApplicationController
       if @ai
         #binding.pry
         #byebug
-        @services = @ai.services.order_by_price
+        @services = @ai.services.order_by_price.search(params[:search])
       else
         redirect_to ais_path, alert:"AI not found"
       end
     else
-      @services = Service.all.order_by_price
+      @services = Service.all.order_by_price.search(params[:search])
     end
   end
 
