@@ -6,6 +6,13 @@
   <%= submit_tag("Search") %>
 <% end %>
 
+<%= form_tag(ais_path, method: "get") do %>
+  <%= hidden_field_tag(:order, params[:order]) %>
+  <%= submit_tag("Please order") %>
+<% end %>
+
+
+
 <ul><% @ais.each do |ai| %>
   <li><%=link_to ai.name_and_balance, ai_path(ai) %> - <%= link_to 'Destroy',  ai_path(ai), data: { confirm: 'Are you sure?' }, method: :delete %> OR <%= link_to "Edit AI", edit_ai_path(ai) %></li>
   <% end %>

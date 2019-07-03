@@ -48,9 +48,11 @@ end
 
   # view all of the ais
 def index
+  if params[:order]
+    @ais = Ai.order_by_ais
+  else
   @ais = Ai.search(params[:search])
-  # @ais = Ai.order_by_price
-  #@ais = Ai.order_by_ais
+  end
 end
 
   # show one ai
