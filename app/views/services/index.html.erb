@@ -1,6 +1,11 @@
 <h1>All Services</h1>
+<%= form_tag(services_path, method: "get") do %>
+  <%= label_tag(:name, "Enter the name of the service you want to see") %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag("Search") %>
+<% end %>
 
 <ul><% @services.each do |service| %>
-<li> <%= link_to service.name, service_path(service) %> (price: <%= service.price %>) - <%=service.description %></li>
+<li> <%= link_to service.name, service_path(service) %> (price: <%= service.price %>) - <%=service.description %> - <%= link_to 'Destroy',  service_path(service), data: { confirm: 'Are you sure?' }, method: :delete %> </li>
 <% end %>
 </ul>
