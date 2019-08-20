@@ -27,34 +27,20 @@ class ServicesController < ApplicationController
 
 
   def index
-    #binding.pry
-    if params[:ai_id]
-      @ai = Ai.find_by(id: params[:ai_id])
-      #@ai = Ai.find_by(id: 12)
-      if @ai
-        #binding.pry
-        #byebug
-        @services = @ai.services.order_by_price.search(params[:search])
-      else
-        redirect_to ais_path, alert:"AI not found"
-      end
-    else
-      @services = Service.all.order_by_price.search(params[:search])
+    @services = Service.all.order_by_price.search(params[:search])
+    respond_to do |f|
+      f.html
+      f.json {render json: @services}
     end
   end
 
   def show
-    if params[:ai_id]
-      @ai = Ai.find_by(id: params[:ai_id])
-      @services = @ai.services.find_by(id: params[:id])
-      if @service.nil?
-        redirect_to ai_services_path(@ai), alert:"Service not found"
-      end
-    else
-      set_service
+    @service = Service.find_by(id: params[:id])
+    respond_to do |f|
+      f.html
+      f.json {render json: @service}
     end
   end
-
 
   def edit
     set_service
@@ -81,6 +67,7 @@ class ServicesController < ApplicationController
 
   def set_service
     @service = Service.find_by(id: params[:id])
+
     if !@service
       redirect_to services_path
     end
