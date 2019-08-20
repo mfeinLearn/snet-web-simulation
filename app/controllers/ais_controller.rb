@@ -57,8 +57,13 @@ end
 
   # show one ai
 def show
-  set_ai
-  @services = @ai.services
+  @ai = Ai.find_by(id: params[:id])
+  #@services = @ai.services
+
+  respond_to do |f|
+    f.html
+    f.json {render json: @ai}
+  end
 end
 
   # get the form to make changes to the
