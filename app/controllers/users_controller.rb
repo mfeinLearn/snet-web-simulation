@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     #login the user
-    # this is where validations happen 
+    # this is where validations happen
     if @user.save # if the user does not save it will automatically
       # add the method @user.errors - it will add all of the error messages
       # in there(errors)| @user.errors - now it will have information about
@@ -32,6 +32,7 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
+      # render json: @user # convert to json
   end
 
   private
