@@ -1,3 +1,4 @@
+
 $(() => { // document ready
   bindClickHandlers()
 })
@@ -27,6 +28,70 @@ const bindClickHandlers = () => { // <- 15:27
       let serviceHtml = newService.formatShow()
       $('#app-container').append(serviceHtml)
     })
+  })
+
+  $(document).on('click', 'next-service', function() {
+    // make a call to our backend api endpoint
+    let id = $(this).attr('data-id')
+    fetch(`services/${id}/next`)
+    // console.log("nexttt!!!!")
+  })
+
+  // I want to select my form which has an id of new_service
+  // and I want to have a listener for
+  // on submit because it is a form. so the events that forms usually have is
+  // a submit event. Pass in the event object
+  $('#new_service').on('submit', function(e){
+    // pervent the default I just want the form submittion to
+    // pause automatically
+    e.preventDefault()
+    // Now I have hijacked the submittion of this paticular service
+    // console.log("submitting service")
+    // Next I want to grab the values that I input into this form we
+    // can do that with jquary with a method called seralize
+
+    // I am going to wrap the this which is in this case the form in a jquary object
+    // this is the form it self and I am wraping it in this jquary
+    // console.log($(this).serialize())// this will serialize my form data it should look like this:
+    // this serialize the information that I put into the form and will allow us to then send back to our server
+    //I am going to save this in a variable called values.
+    //utf8=%?????&authenticity_token=?????????????????????????service%name%=??????????????service%?????????????description%????????????service%????????????price%??????????
+    const values = $(this).serialize()
+    // now I can make a post request to my backend
+    // and because this is a restful app to create a new service it is going to be a post request to /services
+    // the next thing that we are going to need to pass in is our data
+    // in our case its the seralized data that we saved in a variable called
+    // values
+    // once we are sussful with posting we can chain a method called
+    // .done which takes in a callback function that gives us
+    // the data that is returned to us from the server
+    //Go to the service controller and go to the create action.
+
+    // once I am successful with posting to my backend
+    // then
+    // 06:08
+    $.post("/services",values).done(function(data) {
+      // then clear out that div
+      $('#app-container').html('')
+      // then I can repaint the dom how ever I see fit
+      // now we replaced everything inside that div with whatever we want
+      // this all happens without a page refresh
+      // what I want to do is to display that new service information
+      // so I am going to take advantage of my model object that I created
+      // down here for a service constructor
+      // console.log(data)
+
+      const newService = new Service(data)// my Service constructor takes in a service
+      // and extracts all of those values and assigns its properties and since I have a
+      // method on the prototype called formatShow, I am going to reuse my formatShow
+      // prototype method to display that now service information
+
+      // formatShow returns html so
+      const htmlToAdd = newService.formatShow()
+      // I can then append to my app container a html tag
+      $('#app-container').html(htmlToAdd) // 11:45
+    })
+
   })
 }
 
@@ -104,6 +169,11 @@ Service.prototype.formatIndex = function(){
 Service.prototype.formatShow = function(){
   let serviceHtml = `
     <h3>${this.name}</h3>
+    <h4>${this.description}</h4>
+    <h4>${this.price}</h4>
+
+
+    <button class="next-service" data-id="${this.id}" >Next</button>
   `
   return serviceHtml
 }
@@ -119,3 +189,5 @@ Service.prototype.formatShow = function(){
 // 3. and returns that json
 
 //38:26!!
+
+// form summittion: submitting a form via ajax
