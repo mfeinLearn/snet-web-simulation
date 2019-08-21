@@ -158,7 +158,8 @@ function Service(service) {
 // going to be scope to window
 Service.prototype.formatIndex = function(){
   let serviceHtml = `
-    <a href="/services/${this.id}" data-id="${this.id}" class="show_link"><h1>${this.name}</h1></a>
+    <b>hi from js 😁 </b>
+    <a href="/services/${this.id}" data-id="${this.id}" class="show_link"><h9>${this.name}</a> (price: ${this.price} - ${this.description}) </h9><br>
   `
   return serviceHtml
 }
@@ -168,12 +169,20 @@ Service.prototype.formatIndex = function(){
 
 Service.prototype.formatShow = function(){
   let serviceHtml = `
-    <h3>${this.name}</h3>
-    <h4>${this.description}</h4>
-    <h4>${this.price}</h4>
+  <b>hi from js 😁 </b><br>
 
+  <b>Number of AIs that used this Service:></b><br>
+  <br>
+  Price: $ ${this.price} </p>
 
-    <button class="next-service" data-id="${this.id}" >Next</button>
+  <p>Service Description:</p>
+  ${this.name} - ${this.description}.
+  <br/><br/>
+  <p>-------------------------------------------------------------</p>
+
+  <p>-------------------------------------------------------------</p>
+  <button class="next-service" data-id="${this.id}" >Next</button>
+  <br>
   `
   return serviceHtml
 }
