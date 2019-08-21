@@ -19,10 +19,37 @@ class ServicesController < ApplicationController
     @service = Service.find_or_create_by(service_params)#find_or_create_by
     @ai = Ai.find_by(id: params[:ai_id])
     if @service.save
-      redirect_to service_path(@service)
-    else
-      render :new
+      # redirect_to service_path(@service)
+      # this will take advantage of the seralizer that
+      # we have defined for my service.
+      # once I generate json of the service that is going to send
+      # me back to my callback inside .done (go back to service.js)
+
+      # a side note: when we click the create
+      # service button we see the new service that
+      # we added and got back from the server in json
+      # format... now I want to take this
+      # json that gets returned to me from the server
+      # and append it to the dom in order to do that
+      # go to the application layout. You will see that I
+      # have wrapped my yield block in
+      # this div with an id of app-container
+      #this is going to be the div that I
+      # clear out and repaint the dom with anytime I
+      # want to display something new using ajax
+      render json: @service
+     else
+       render :new
     end
+  end
+
+  def next
+    # it is going to call that instance method
+    # grab the next post set it equal to an instance varible
+    # then render json.
+    set_service
+    @next_service = @service.next
+    render json: @next_service
   end
 
 
