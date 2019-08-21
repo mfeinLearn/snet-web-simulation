@@ -7,6 +7,9 @@ get '/login' => 'sessions#new'
 post '/login' => 'sessions#create'
 delete '/logout' => 'sessions#destroy'
 get '/auth/:provider/callback' => 'sessions#create'
+
+get 'services/:id/next', to: 'services#next'
+
 resources :users
 resources :ais#, only:[:new ,:create, :show, :index, :update, :edit]
 resources :services
