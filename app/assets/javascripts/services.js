@@ -17,23 +17,67 @@ const bindClickHandlers = () => { // <- 15:27
   // reference that paticular dom element
   $(document).on('click', '.show_link', function(e) {
     e.preventDefault()
-    // make a call to our backend api endpoint
     $('#app-container').html('')
-    let id = $(this).attr('data-id')
-    fetch(`/services/${id}.json`)
     // create an data-id attribute in the formatter
+    let id = $(this).attr('data-id')
+
+    // make a call to our backend api endpoint
+    fetch(`/services/${id}.json`)
     .then(res => res.json())
     .then(service => {
+      serviceId = service.id
+      console.log(serviceId)
+
       let newService = new Service(service)
       let serviceHtml = newService.formatShow()
       $('#app-container').append(serviceHtml)
-    })
+
+      service.ais.forEach(ai => {
+
+      //new use the responce that I get back from my server and utilize a javascript model object
+      // either with a constructor function or es6 classes
+      let newAi = new Ai(ai)
+      // we created a new post object we can call this paticular method on that prototype. Every instance of post has
+      // the ability to call the formatIndex method on the prototype
+      let aiHtml = newAi.formatShow()
+      // postHtml is a html markup
+      //we are appending that to #app-container
+      $('#app-container').append(aiHtml)
+      })
   })
+
+    // fetch(`/ais/${id}.json`)
+    // // create an data-id attribute in the formatter
+    // .then(res => res.json())
+    // .then(ai => {
+    // })
+
+
+  })
+// user -< ais -< transaction >- service
+// has many transactions
+  // $(document).on('click', '.show_link', function(e) {
+  //   e.preventDefault()
+  //   $('#app-container').html('')
+  //   // create an data-id attribute in the formatter
+  //   let id = $(this).attr('data-id')
+  //       // debugger
+  //   // make a call to our backend api endpoint
+  //   fetch(`/ais/${id}.json`)
+  //   .then(res => res.json())
+  //   .then(ai => {
+  // // debugger
+  //     let newAi = new Ai(ai)
+  //     let aiHtml = newAi.formatShow()
+  //     $('#app-container').append(aiHtml)
+  //     })
+  // })
 
   $(document).on('click', 'next-service', function() {
     // make a call to our backend api endpoint
     let id = $(this).attr('data-id')
     fetch(`services/${id}/next`)
+
     // console.log("nexttt!!!!")
   })
 
@@ -91,7 +135,7 @@ const bindClickHandlers = () => { // <- 15:27
       // I can then append to my app container a html tag
       $('#app-container').html(htmlToAdd) // 11:45
     })
-
+//
   })
 }
 
@@ -105,6 +149,7 @@ const getServices = () => {
     // that will parse the data from the responce and return it on to the next .then
     // with data as the argument to its call back
     .then(services => {  // this outputs a list of objects
+      //console.log(services)
       // now we have to iterate over these objects that we get back  -> 19:08 - 33:05
       // whenever we click on 'All services' navbar lets clear this app-container
 
@@ -125,10 +170,26 @@ const getServices = () => {
         // call this method on the prototype
         let serviceHtml = newService.formatIndex()
         $('#app-container').append(serviceHtml)
-        console.log(newService)
+        //console.log(newService)
       })
     })
 }
+
+// ///// malcome beginning
+// const getAis = () => {
+//   fetch(`/ais/${id}.json`)
+// debugger
+//     .then(res => res.json())
+//     .then(services => {
+//       $('#app-container').html('')
+//       services.forEach(service => {
+//         let newService = new Service(service)
+//         let serviceHtml = newService.formatIndex()
+//         $('#app-container').append(serviceHtml)
+//       })
+//     })
+// }
+// ///// malcome end
 
 // JavaScript model object( with a constructor function or  es6 classes)
 // constructor function
@@ -140,7 +201,26 @@ function Service(service) {
   this.description = service.description
   this.price = service.price
   this.transactions = service.transactions
+  this.ais = service.ais
+  this.users = service.users
+
 }
+
+function Ai(ai) {
+  // this is always going to be whatever object we construct using the new keyword
+  this.id = ai.id
+  this.name = ai.name
+  this.user = ai.user
+  this.description = ai.description
+  this.balance = ai.balance
+  this.transactions = ai.transactions
+  this.services = ai.services
+
+
+}
+
+
+
 
 // Now because we have a constructor function for a service we can start to declear
 // different prototype methods on that paticular service and we can do some formatting using those prototype methods
@@ -157,6 +237,7 @@ function Service(service) {
 // for prototype methods other wize the arrow function is
 // going to be scope to window
 Service.prototype.formatIndex = function(){
+
   let serviceHtml = `
     <b>hi from js 😁 </b>
     <a href="/services/${this.id}" data-id="${this.id}" class="show_link"><h9>${this.name}</a> (price: ${this.price} - ${this.description}) </h9><br>
@@ -170,22 +251,41 @@ Service.prototype.formatIndex = function(){
 Service.prototype.formatShow = function(){
   let serviceHtml = `
   <b>hi from js 😁 </b><br>
-
+  <b>Service.prototype </b><br>
   <b>Number of AIs that used this Service:></b><br>
   <br>
-  Price: $ ${this.price} </p>
-
-  <p>Service Description:</p>
-  ${this.name} - ${this.description}.
+  id of service: $ ${this.id}!!!!!!!! </p>
+  Name of service: ${this.name} </p>
+  <p>Description:${this.description}.......</p>
   <br/><br/>
   <p>-------------------------------------------------------------</p>
 
   <p>-------------------------------------------------------------</p>
-  <button class="next-service" data-id="${this.id}" >Next</button>
+  <button class="next-service" >Next</button>
   <br>
   `
   return serviceHtml
 }
+Ai.prototype.formatShow = function(){
+  let aiHtml = `
+  <b>hi from js 😁 </b><br>
+  <b>Ai.prototype </b><br>
+
+  <br>
+  id of Ai: $ ${this.id}!!!!!!!! </p>
+  Name of Ai: $ ${this.name}!!!!!!!! </p>
+  Description: $ ${this.description} !!!!!!!</p>
+
+  `
+  return aiHtml
+}
+// Ai.prototype.formatShow = function(){// malcome just added
+//   let aiHtml = `
+//   <p>An Ai:</p>
+//   ........... - ${this.name} - ..........
+//   `
+//   return aiHtml
+// }//end malcome just added
 
 // changing the url:
  // I want to also change the url of the page as well:
@@ -200,3 +300,4 @@ Service.prototype.formatShow = function(){
 //38:26!!
 
 // form summittion: submitting a form via ajax
+// service.ais[0].id
