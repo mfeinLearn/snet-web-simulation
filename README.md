@@ -1,25 +1,27 @@
-# README
+# SnetWebSimulation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to MY!!!!! simulation of the SingularityNet Network! This project is my web based simulation of the SingularityNet Network. You can learn more about this project by reading my blogs: https://mfeinlearn.github.io/ai_services_of_the_future
+and [].
 
-Things you may want to cover:
 
-* Ruby version
+## Installation
 
-* System dependencies
+Execute the following commands:
 
-* Configuration
+    $ bundle install
 
-* Database creation
+then:
 
-* Database initialization
+    $ rails s
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## Contributing
 
-* Deployment instructions
+Bug reports and pull requests are welcome on GitHub at https://github.com/mfeinLearn/snet-web-simulation. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-* ...
-# snet-web-simulation
+## License
+This project has been licensed under the MIT open source license [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+
+Everyone interacting in the SnetWebSimulation project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/mfeinLearn/the_crypto_update/blob/master/CODE_OF_CONDUCT.md).
