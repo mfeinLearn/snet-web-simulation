@@ -1,7 +1,6 @@
 # SnetWebSimulation
 
-Welcome to MY!!!!! simulation of the SingularityNet Network! This project is my web based simulation of the SingularityNet Network. You can learn more about this project by reading my blogs: https://mfeinlearn.github.io/ai_services_of_the_future
-and [].
+Welcome to **my** simulation of the SingularityNet Network! This project is my web based simulation of the SingularityNet Network. You can learn more about this project by reading my blogs: https://mfeinlearn.github.io/ai_services_of_the_future.
 
 
 ## Installation
